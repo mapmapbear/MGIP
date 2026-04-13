@@ -192,6 +192,30 @@ struct ShadowUniforms
   vec4 shadowBiasAndKernel;         // x = depth bias constant, y = depth bias slope, z = map size, w = PCF radius
 };
 
+// Debug visualization settings (matches DebugRegistry.h DebugSettings)
+// Note: No default values here - Slang doesn't support C++ default member init.
+// C++ code can use DebugSettings{} for zero/false initialization, then set showStats=true explicitly.
+struct DebugSettings {
+  // Geometry visualization
+  bool showBounds;
+  bool showBoundingSpheres;
+  bool showLights;
+  bool showFrustum;
+  bool showNormals;
+  bool showStats;  // Default true in C++
+
+  // Visualization options
+  int selectedLightIndex;      // -1 = all
+  float lightVisualizationScale;
+  float boundsScale;
+  bool boundsForAllMeshes;
+  float normalVisualizationLength;
+  int normalVisualizationDensity;
+  bool showCameraFrustum;
+  bool showShadowCascades;
+  int cascadeIndex;            // -1 = all
+};
+
 // Push constant for GBuffer pass with PBR material params (legacy)
 struct PushConstantGBuffer
 {

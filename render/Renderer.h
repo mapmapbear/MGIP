@@ -66,6 +66,8 @@ struct RenderParams
   glm::vec3                              lightDirection{0.0f, -1.0f, 0.0f};  // Default: from above
   // Shadow debug mode: 0=normal, 1=shadow factor, 2=shadow UV, 3=view depth, 4=light clip XY, 5=shadow depth
   int                                    shadowDebugMode{0};
+  // Debug visualization settings
+  shaderio::DebugSettings                debugSettings{};
 };
 
 struct GltfUploadResult
