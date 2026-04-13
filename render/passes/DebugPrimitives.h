@@ -305,7 +305,7 @@ public:
 
             const std::array<glm::vec3, 8> cameraCorners = computeFrustumCorners(invViewProj);
             const glm::vec4 magentaColor(1.0f, 0.0f, 1.0f, 1.0f);
-            vertexCount += drawFrustumWireframe(vertexPtr, vertexCount, cameraCorners, magentaColor);
+            vertexCount += drawFrustumWireframe(vertexPtr + vertexCount, cameraCorners, magentaColor);
         }
 
         // Shadow cascade frustums (color-coded)

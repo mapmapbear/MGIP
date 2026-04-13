@@ -5,6 +5,7 @@
 #include "../rhi/vulkan/VulkanDevice.h"
 #include "../rhi/vulkan/VulkanFrameContext.h"
 #include "FrameSubmission.h"
+#include "passes/DebugPrimitives.h"
 
 #include <cstring>
 #include <type_traits>
@@ -581,6 +582,26 @@ void Renderer::init(GLFWwindow* window, rhi::Surface& surface, bool vSync)
   freeStagingBuffers(m_device.allocator, m_device.stagingBuffers);
 
   updateGraphicsDescriptorSet();
+
+  // Initialize debug primitives
+  m_debugRegistry.registerPrimitive("bounds", []() {
+      return std::make_unique<BoundingBoxPrimitive>();
+  });
+  m_debugRegistry.registerPrimitive("spheres", []() {
+      return std::make_unique<BoundingSpherePrimitive>();
+  });
+  m_debugRegistry.registerPrimitive("lights", []() {
+      return std::make_unique<LightVisualizerPrimitive>();
+  });
+  m_debugRegistry.registerPrimitive("frustum", []() {
+      return std::make_unique<FrustumWireframePrimitive>();
+  });
+  m_debugRegistry.registerPrimitive("normals", []() {
+      return std::make_unique<NormalOverlayPrimitive>();
+  });
+  m_debugRegistry.registerPrimitive("stats", []() {
+      return std::make_unique<StatsOverlayPrimitive>();
+  });
 
   // Initialize passes and pass executor
   m_shadowPass          = std::make_unique<ShadowPass>(this);

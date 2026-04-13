@@ -24,6 +24,7 @@
 #include "LightResources.h"
 #include "IBLResources.h"
 #include "ShadowResources.h"
+#include "DebugRegistry.h"
 #include "TransientAllocator.h"
 #include "../rhi/RHICommandList.h"
 #include "../rhi/RHIFrameContext.h"
@@ -129,6 +130,7 @@ public:
   SceneResources& getSceneResources() { return m_swapchainDependent.sceneResources; }
   IBLResources& getIBLResources() { return m_iblResources; }
   ShadowResources& getShadowResources() { return m_shadowResources; }
+  DebugRegistry& getDebugRegistry() { return m_debugRegistry; }
   void      waitForIdle();
 
   // LightPass support
@@ -381,6 +383,9 @@ private:
 
   // Shadow support (single directional shadow map)
   ShadowResources m_shadowResources;
+
+  // Debug visualization registry
+  DebugRegistry m_debugRegistry;
 
   // Light pipeline
   PipelineHandle m_lightPipeline{};
