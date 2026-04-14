@@ -6,13 +6,13 @@ namespace demo {
 
 class Renderer;
 
-class ShadowPass : public RenderPassNode
+class DebugPass : public RenderPassNode
 {
 public:
-  explicit ShadowPass(Renderer* renderer);
-  ~ShadowPass() override = default;
+  explicit DebugPass(Renderer* renderer);
+  ~DebugPass() override = default;
 
-  [[nodiscard]] const char* getName() const override { return "ShadowPass"; }
+  [[nodiscard]] const char* getName() const override { return "DebugPass"; }
   [[nodiscard]] HandleSlice<PassResourceDependency> getDependencies() const override;
   void execute(const PassContext& context) const override;
 
