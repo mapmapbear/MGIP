@@ -1,7 +1,10 @@
-[20:13:24.148] Starting ... 
-[20:13:24.357] VulkanDevice::init: begin
-[20:13:24.374] VulkanDevice::initInstance: creating Vulkan instance
-[20:13:24.424] VulkanDevice::initInstance: Vulkan instance created and function pointers loaded
-[20:13:24.522] VulkanDevice::init: completed
-[20:13:24.782] Created application descriptor pool: 10000 textures, 15 dynamic UBOs, 20 sets
-[20:13:24.782] Created UI descriptor pool: 20 textures, 20 sets
+[02:06:31.076] Starting ... 
+[02:06:31.299] VulkanDevice::init: begin
+[02:06:31.322] VulkanDevice::initInstance: creating Vulkan instance
+[02:06:31.383] VulkanDevice::initInstance: Vulkan instance created and function pointers loaded
+[02:06:31.500] VulkanDevice::init: completed
+[02:06:31.501] Static buffer upload: staging fallback with ReBAR direct-write for buffers up to 8.0 MiB
+[02:06:31.605] Created application descriptor pool: 10000 textures, 15 dynamic UBOs, 32 sets
+[02:06:31.605] Created UI descriptor pool: 20 textures, 20 sets
+[02:06:31.700] Failed to load model: resources/Test/test.gltf
+[02:06:31.703] Generated 128 animated random point lights for LightCoarseCulling
