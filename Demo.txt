@@ -1,10 +1,219 @@
-[02:06:31.076] Starting ... 
-[02:06:31.299] VulkanDevice::init: begin
-[02:06:31.322] VulkanDevice::initInstance: creating Vulkan instance
-[02:06:31.383] VulkanDevice::initInstance: Vulkan instance created and function pointers loaded
-[02:06:31.500] VulkanDevice::init: completed
-[02:06:31.501] Static buffer upload: staging fallback with ReBAR direct-write for buffers up to 8.0 MiB
-[02:06:31.605] Created application descriptor pool: 10000 textures, 15 dynamic UBOs, 32 sets
-[02:06:31.605] Created UI descriptor pool: 20 textures, 20 sets
-[02:06:31.700] Failed to load model: resources/Test/test.gltf
-[02:06:31.703] Generated 128 animated random point lights for LightCoarseCulling
+[22:15:38.439] Starting ... 
+[22:15:38.592] VulkanDevice::init: begin
+[22:15:38.610] VulkanDevice::initInstance: creating Vulkan instance
+[22:15:38.667] VulkanDevice::initInstance: Vulkan instance created and function pointers loaded
+[22:15:38.802] VulkanDevice::init: completed
+[22:15:38.805] Static buffer upload: host staging to device-local buffers
+[22:15:38.859] Created application descriptor pool: 10000 textures, 15 dynamic UBOs, 32 sets
+[22:15:38.859] Created UI descriptor pool: 20 sampled images, 2 samplers, 22 sets
+[22:15:38.859] RenderDevice::initImGui: begin
+[22:15:38.903] RenderDevice::initImGui: Vulkan backend initialized
+[22:15:38.903] RenderDevice::initImGui: completed
+[22:15:38.904] RenderDevice::init: scene resources begin
+[22:15:38.917] RenderDevice::init: scene resources completed
+[22:15:38.917] RenderDevice::init: IBL resources begin
+[22:15:38.917] RenderDevice::createIBLResources: checking resources/environment/lilienstein_4k.ktx2
+[22:15:38.940] RenderDevice::createIBLResources: loaded KTX2 payload
+[22:15:38.940] RenderDevice::createIBLResources: image created
+[22:15:38.940] RenderDevice::createIBLResources: image layout initialized
+[22:15:38.940] RenderDevice::createIBLResources: upload context initialized
+[22:15:38.943] RenderDevice::createIBLResources: upload recorded
+[22:15:38.943] RenderDevice::createIBLResources: view created
+[22:15:38.943] Loaded IBL environment resources/environment/lilienstein_4k.ktx2 (4096x2048, 13 mips, VK_FORMAT_UNKNOWN, 10.67 MiB)
+[22:15:38.945] RenderDevice::init: IBL resources completed
+[22:15:38.946] RenderDevice::init: GPU culling resources begin
+[22:15:38.946] RenderDevice::init: GPU culling resources completed
+[22:15:38.946] RenderDevice::init: shadow culling resources begin
+[22:15:38.946] RenderDevice::init: shadow culling resources completed
+[22:15:38.946] RenderDevice::init: light resources begin
+[22:15:38.946] RenderDevice::init: light resources completed
+[22:15:38.946] RenderDevice::init: CSM resources begin
+[22:15:38.947] RenderDevice::init: CSM resources completed
+[22:15:39.676] Upload memory snapshot: pendingUploads=0 rendererStaging=0 buffers 0.00 MiB meshPoolDeferred=0 buffers 0.00 MiB
+[22:15:39.676] Upload memory snapshot after renderer staging free: rendererStaging=0 buffers meshPoolDeferred=0 buffers 0.00 MiB
+[22:15:39.817] Loaded GPUDriven equirect IBL resources/environment/lilienstein_4k.ktx2 (4096x2048, 13 mips, 10.67 MiB); split-sum ready
+[22:15:39.891] Upload memory snapshot: pendingUploads=0 rendererStaging=0 buffers 0.00 MiB meshPoolDeferred=0 buffers 0.00 MiB
+[22:15:39.891] Upload memory snapshot after renderer staging free: rendererStaging=0 buffers meshPoolDeferred=0 buffers 0.00 MiB
+[22:15:39.892] Upload memory snapshot: pendingUploads=0 rendererStaging=0 buffers 0.00 MiB meshPoolDeferred=0 buffers 0.00 MiB
+[22:15:39.892] Upload memory snapshot after renderer staging free: rendererStaging=0 buffers meshPoolDeferred=0 buffers 0.00 MiB
+[22:15:39.892] Upload memory snapshot: pendingUploads=0 rendererStaging=0 buffers 0.00 MiB meshPoolDeferred=0 buffers 0.00 MiB
+[22:15:39.892] Upload memory snapshot after renderer staging free: rendererStaging=0 buffers meshPoolDeferred=0 buffers 0.00 MiB
+[22:15:39.893] Upload memory snapshot: pendingUploads=0 rendererStaging=0 buffers 0.00 MiB meshPoolDeferred=0 buffers 0.00 MiB
+[22:15:39.893] Upload memory snapshot after renderer staging free: rendererStaging=0 buffers meshPoolDeferred=0 buffers 0.00 MiB
+[22:15:40.728] Upload memory snapshot: pendingUploads=0 rendererStaging=0 buffers 0.00 MiB meshPoolDeferred=0 buffers 0.00 MiB
+[22:15:40.728] Upload memory snapshot after renderer staging free: rendererStaging=0 buffers meshPoolDeferred=0 buffers 0.00 MiB
+[22:15:40.729] Generated 128 animated random point lights for LightCoarseCulling
+[22:15:40.775] GPU smoke: first frame rendered
+[22:15:40.804] Upload memory snapshot: pendingUploads=0 rendererStaging=0 buffers 0.00 MiB meshPoolDeferred=0 buffers 0.00 MiB
+[22:15:40.805] Upload memory snapshot after renderer staging free: rendererStaging=0 buffers meshPoolDeferred=0 buffers 0.00 MiB
+[22:15:40.805] Upload memory snapshot: pendingUploads=0 rendererStaging=0 buffers 0.00 MiB meshPoolDeferred=0 buffers 0.00 MiB
+[22:15:40.805] Upload memory snapshot after renderer staging free: rendererStaging=0 buffers meshPoolDeferred=0 buffers 0.00 MiB
+[22:15:40.806] Upload memory snapshot: pendingUploads=0 rendererStaging=0 buffers 0.00 MiB meshPoolDeferred=0 buffers 0.00 MiB
+[22:15:40.806] Upload memory snapshot after renderer staging free: rendererStaging=0 buffers meshPoolDeferred=0 buffers 0.00 MiB
+[22:15:40.807] Upload memory snapshot: pendingUploads=0 rendererStaging=0 buffers 0.00 MiB meshPoolDeferred=0 buffers 0.00 MiB
+[22:15:40.807] Upload memory snapshot after renderer staging free: rendererStaging=0 buffers meshPoolDeferred=0 buffers 0.00 MiB
+[22:15:41.583] Loaded scene cache: resources/Sponza\Cache\Sponza.gltf.gltfcache
+[22:15:41.590] Loaded glTF model: resources/Sponza/Sponza.gltf (103 meshes, 25 materials, 69 textures, 0 lights)
+[22:15:41.709] Scene upload batch: critical=1 final=0 textures=6 materials=2 meshes=2
+[22:15:41.709] glTF upload batch: textures=6 materials=2 meshes=2 textureBytes=25165848 meshBytes=86236 totalBytes=25252084 mipGenTextures=6 maxTexture=1024x1024
+[22:15:41.710]   glTF texture[4]: uri=8006627369776289000.png size=1024x1024 pixels=4194304 ktx2=0 mipLevels=11
+[22:15:41.710]   glTF texture[3]: uri=12501374198249454378.jpg size=1024x1024 pixels=4194304 ktx2=0 mipLevels=11
+[22:15:41.710]   glTF texture[5]: uri=715093869573992647.jpg size=1024x1024 pixels=4194304 ktx2=0 mipLevels=11
+[22:15:41.710]   glTF texture[63]: uri=6772804448157695701.jpg size=1024x1024 pixels=4194304 ktx2=0 mipLevels=11
+[22:15:41.710]   glTF texture[62]: uri=759203620573749278.jpg size=1024x1024 pixels=4194304 ktx2=0 mipLevels=11
+[22:15:41.710]   glTF texture[64]: uri=13196865903111448057.jpg size=1024x1024 pixels=4194304 ktx2=0 mipLevels=11
+[22:15:41.711] Skipping runtime mip generation for raw glTF texture: uri=8006627369776289000.png size=1024x1024 requestedMipLevels=11
+[22:15:41.711] Skipping runtime mip generation for raw glTF texture: uri=12501374198249454378.jpg size=1024x1024 requestedMipLevels=11
+[22:15:41.712] Skipping runtime mip generation for raw glTF texture: uri=715093869573992647.jpg size=1024x1024 requestedMipLevels=11
+[22:15:41.713] Skipping runtime mip generation for raw glTF texture: uri=6772804448157695701.jpg size=1024x1024 requestedMipLevels=11
+[22:15:41.713] Skipping runtime mip generation for raw glTF texture: uri=759203620573749278.jpg size=1024x1024 requestedMipLevels=11
+[22:15:41.714] Skipping runtime mip generation for raw glTF texture: uri=13196865903111448057.jpg size=1024x1024 requestedMipLevels=11
+[22:15:41.726] Scene upload batch: critical=0 final=0 textures=14 materials=5 meshes=7
+[22:15:41.727] Upload memory snapshot: pendingUploads=0 rendererStaging=3 buffers 24.08 MiB meshPoolDeferred=0 buffers 0.00 MiB
+[22:15:41.727] Upload memory snapshot after renderer staging free: rendererStaging=0 buffers meshPoolDeferred=0 buffers 0.00 MiB
+[22:15:41.728] glTF upload batch: textures=14 materials=5 meshes=7 textureBytes=58720312 meshBytes=618824 totalBytes=59339136 mipGenTextures=14 maxTexture=1024x1024
+[22:15:41.728]   glTF texture[7]: uri=7268504077753552595.jpg size=1024x1024 pixels=4194304 ktx2=0 mipLevels=11
+[22:15:41.728]   glTF texture[6]: uri=4477655471536070370.jpg size=1024x1024 pixels=4194304 ktx2=0 mipLevels=11
+[22:15:41.728]   glTF texture[8]: uri=8503262930880235456.jpg size=1024x1024 pixels=4194304 ktx2=0 mipLevels=11
+[22:15:41.728]   glTF texture[10]: uri=8750083169368950601.jpg size=1024x1024 pixels=4194304 ktx2=0 mipLevels=11
+[22:15:41.728]   glTF texture[9]: uri=13982482287905699490.jpg size=1024x1024 pixels=4194304 ktx2=0 mipLevels=11
+[22:15:41.728]   glTF texture[11]: uri=16885566240357350108.jpg size=1024x1024 pixels=4194304 ktx2=0 mipLevels=11
+[22:15:41.728]   glTF texture[50]: uri=11474523244911310074.jpg size=1024x1024 pixels=4194304 ktx2=0 mipLevels=11
+[22:15:41.729]   glTF texture[49]: uri=4601176305987539675.jpg size=1024x1024 pixels=4194304 ktx2=0 mipLevels=11
+[22:15:41.729]   glTF texture[48]: uri=466164707995436622.jpg size=1024x1024 pixels=4194304 ktx2=0 mipLevels=11
+[22:15:41.729]   glTF texture[47]: uri=17876391417123941155.jpg size=1024x1024 pixels=4194304 ktx2=0 mipLevels=11
+[22:15:41.729]   glTF texture[46]: uri=6593109234861095314.jpg size=1024x1024 pixels=4194304 ktx2=0 mipLevels=11
+[22:15:41.729]   glTF texture[54]: uri=16275776544635328252.png size=1024x1024 pixels=4194304 ktx2=0 mipLevels=11
+[22:15:41.729]   glTF texture[53]: uri=14170708867020035030.jpg size=1024x1024 pixels=4194304 ktx2=0 mipLevels=11
+[22:15:41.729]   glTF texture[55]: uri=1219024358953944284.jpg size=1024x1024 pixels=4194304 ktx2=0 mipLevels=11
+[22:15:41.731] Skipping runtime mip generation for raw glTF texture: uri=7268504077753552595.jpg size=1024x1024 requestedMipLevels=11
+[22:15:41.732] Skipping runtime mip generation for raw glTF texture: uri=4477655471536070370.jpg size=1024x1024 requestedMipLevels=11
+[22:15:41.733] Skipping runtime mip generation for raw glTF texture: uri=8503262930880235456.jpg size=1024x1024 requestedMipLevels=11
+[22:15:41.744] Skipping runtime mip generation for raw glTF texture: uri=8750083169368950601.jpg size=1024x1024 requestedMipLevels=11
+[22:15:41.745] Skipping runtime mip generation for raw glTF texture: uri=13982482287905699490.jpg size=1024x1024 requestedMipLevels=11
+[22:15:41.747] Skipping runtime mip generation for raw glTF texture: uri=16885566240357350108.jpg size=1024x1024 requestedMipLevels=11
+[22:15:41.747] Skipping runtime mip generation for raw glTF texture: uri=11474523244911310074.jpg size=1024x1024 requestedMipLevels=11
+[22:15:41.748] Skipping runtime mip generation for raw glTF texture: uri=4601176305987539675.jpg size=1024x1024 requestedMipLevels=11
+[22:15:41.749] Skipping runtime mip generation for raw glTF texture: uri=466164707995436622.jpg size=1024x1024 requestedMipLevels=11
+[22:15:41.750] Skipping runtime mip generation for raw glTF texture: uri=17876391417123941155.jpg size=1024x1024 requestedMipLevels=11
+[22:15:41.750] Skipping runtime mip generation for raw glTF texture: uri=6593109234861095314.jpg size=1024x1024 requestedMipLevels=11
+[22:15:41.751] Skipping runtime mip generation for raw glTF texture: uri=16275776544635328252.png size=1024x1024 requestedMipLevels=11
+[22:15:41.752] Skipping runtime mip generation for raw glTF texture: uri=14170708867020035030.jpg size=1024x1024 requestedMipLevels=11
+[22:15:41.752] Skipping runtime mip generation for raw glTF texture: uri=1219024358953944284.jpg size=1024x1024 requestedMipLevels=11
+[22:15:41.824] Scene upload batch: critical=0 final=0 textures=16 materials=6 meshes=9
+[22:15:41.827] Upload memory snapshot: pendingUploads=0 rendererStaging=3 buffers 56.67 MiB meshPoolDeferred=0 buffers 0.00 MiB
+[22:15:41.828] Upload memory snapshot after renderer staging free: rendererStaging=0 buffers meshPoolDeferred=0 buffers 0.00 MiB
+[22:15:41.829] glTF upload batch: textures=16 materials=6 meshes=9 textureBytes=67108928 meshBytes=1436064 totalBytes=68544992 mipGenTextures=16 maxTexture=1024x1024
+[22:15:41.830]   glTF texture[57]: uri=755318871556304029.jpg size=1024x1024 pixels=4194304 ktx2=0 mipLevels=11
+[22:15:41.830]   glTF texture[56]: uri=3827035219084910048.jpg size=1024x1024 pixels=4194304 ktx2=0 mipLevels=11
+[22:15:41.830]   glTF texture[58]: uri=2411100444841994089.jpg size=1024x1024 pixels=4194304 ktx2=0 mipLevels=11
+[22:15:41.830]   glTF texture[31]: uri=11490520546946913238.jpg size=1024x1024 pixels=4194304 ktx2=0 mipLevels=11
+[22:15:41.830]   glTF texture[30]: uri=3628158980083700836.jpg size=1024x1024 pixels=4194304 ktx2=0 mipLevels=11
+[22:15:41.830]   glTF texture[32]: uri=3455394979645218238.jpg size=1024x1024 pixels=4194304 ktx2=0 mipLevels=11
+[22:15:41.830]   glTF texture[1]: uri=5061699253647017043.png size=1024x1024 pixels=4194304 ktx2=0 mipLevels=11
+[22:15:41.830]   glTF texture[0]: uri=8773302468495022225.jpg size=1024x1024 pixels=4194304 ktx2=0 mipLevels=11
+[22:15:41.830]   glTF texture[2]: uri=11872827283454512094.jpg size=1024x1024 pixels=4194304 ktx2=0 mipLevels=11
+[22:15:41.831]   glTF texture[40]: uri=4675343432951571524.jpg size=1024x1024 pixels=4194304 ktx2=0 mipLevels=11
+[22:15:41.831]   glTF texture[39]: uri=7056944414013900257.jpg size=1024x1024 pixels=4194304 ktx2=0 mipLevels=11
+[22:15:41.831]   glTF texture[41]: uri=7815564343179553343.jpg size=1024x1024 pixels=4194304 ktx2=0 mipLevels=11
+[22:15:41.831]   glTF texture[43]: uri=2775690330959970771.jpg size=1024x1024 pixels=4194304 ktx2=0 mipLevels=11
+[22:15:41.831]   glTF texture[42]: uri=2374361008830720677.jpg size=1024x1024 pixels=4194304 ktx2=0 mipLevels=11
+[22:15:41.831]   glTF texture[52]: uri=9288698199695299068.jpg size=1024x1024 pixels=4194304 ktx2=0 mipLevels=11
+[22:15:41.831]   glTF texture[51]: uri=4910669866631290573.jpg size=1024x1024 pixels=4194304 ktx2=0 mipLevels=11
+[22:15:41.833] Skipping runtime mip generation for raw glTF texture: uri=755318871556304029.jpg size=1024x1024 requestedMipLevels=11
+[22:15:41.833] Skipping runtime mip generation for raw glTF texture: uri=3827035219084910048.jpg size=1024x1024 requestedMipLevels=11
+[22:15:41.834] Skipping runtime mip generation for raw glTF texture: uri=2411100444841994089.jpg size=1024x1024 requestedMipLevels=11
+[22:15:41.835] Skipping runtime mip generation for raw glTF texture: uri=11490520546946913238.jpg size=1024x1024 requestedMipLevels=11
+[22:15:41.836] Skipping runtime mip generation for raw glTF texture: uri=3628158980083700836.jpg size=1024x1024 requestedMipLevels=11
+[22:15:41.837] Skipping runtime mip generation for raw glTF texture: uri=3455394979645218238.jpg size=1024x1024 requestedMipLevels=11
+[22:15:41.837] Skipping runtime mip generation for raw glTF texture: uri=5061699253647017043.png size=1024x1024 requestedMipLevels=11
+[22:15:41.838] Skipping runtime mip generation for raw glTF texture: uri=8773302468495022225.jpg size=1024x1024 requestedMipLevels=11
+[22:15:41.839] Skipping runtime mip generation for raw glTF texture: uri=11872827283454512094.jpg size=1024x1024 requestedMipLevels=11
+[22:15:41.840] Skipping runtime mip generation for raw glTF texture: uri=4675343432951571524.jpg size=1024x1024 requestedMipLevels=11
+[22:15:41.841] Skipping runtime mip generation for raw glTF texture: uri=7056944414013900257.jpg size=1024x1024 requestedMipLevels=11
+[22:15:41.841] Skipping runtime mip generation for raw glTF texture: uri=7815564343179553343.jpg size=1024x1024 requestedMipLevels=11
+[22:15:41.842] Skipping runtime mip generation for raw glTF texture: uri=2775690330959970771.jpg size=1024x1024 requestedMipLevels=11
+[22:15:41.843] Skipping runtime mip generation for raw glTF texture: uri=2374361008830720677.jpg size=1024x1024 requestedMipLevels=11
+[22:15:41.844] Skipping runtime mip generation for raw glTF texture: uri=9288698199695299068.jpg size=1024x1024 requestedMipLevels=11
+[22:15:41.845] Skipping runtime mip generation for raw glTF texture: uri=4910669866631290573.jpg size=1024x1024 requestedMipLevels=11
+[22:15:41.995] Scene upload batch: critical=0 final=0 textures=14 materials=5 meshes=13
+[22:15:41.999] Upload memory snapshot: pendingUploads=0 rendererStaging=3 buffers 66.04 MiB meshPoolDeferred=0 buffers 0.00 MiB
+[22:15:42.001] Upload memory snapshot after renderer staging free: rendererStaging=0 buffers meshPoolDeferred=0 buffers 0.00 MiB
+[22:15:42.002] glTF upload batch: textures=14 materials=5 meshes=13 textureBytes=58720312 meshBytes=3119528 totalBytes=61839840 mipGenTextures=14 maxTexture=1024x1024
+[22:15:42.002]   glTF texture[13]: uri=5792855332885324923.jpg size=1024x1024 pixels=4194304 ktx2=0 mipLevels=11
+[22:15:42.002]   glTF texture[12]: uri=16299174074766089871.jpg size=1024x1024 pixels=4194304 ktx2=0 mipLevels=11
+[22:15:42.002]   glTF texture[14]: uri=11968150294050148237.jpg size=1024x1024 pixels=4194304 ktx2=0 mipLevels=11
+[22:15:42.002]   glTF texture[45]: uri=2185409758123873465.jpg size=1024x1024 pixels=4194304 ktx2=0 mipLevels=11
+[22:15:42.003]   glTF texture[44]: uri=332936164838540657.jpg size=1024x1024 pixels=4194304 ktx2=0 mipLevels=11
+[22:15:42.003]   glTF texture[60]: uri=8481240838833932244.jpg size=1024x1024 pixels=4194304 ktx2=0 mipLevels=11
+[22:15:42.003]   glTF texture[59]: uri=10381718147657362067.jpg size=1024x1024 pixels=4194304 ktx2=0 mipLevels=11
+[22:15:42.003]   glTF texture[61]: uri=17556969131407844942.jpg size=1024x1024 pixels=4194304 ktx2=0 mipLevels=11
+[22:15:42.003]   glTF texture[22]: uri=6047387724914829168.jpg size=1024x1024 pixels=4194304 ktx2=0 mipLevels=11
+[22:15:42.003]   glTF texture[21]: uri=15722799267630235092.jpg size=1024x1024 pixels=4194304 ktx2=0 mipLevels=11
+[22:15:42.003]   glTF texture[23]: uri=8051790464816141987.jpg size=1024x1024 pixels=4194304 ktx2=0 mipLevels=11
+[22:15:42.003]   glTF texture[37]: uri=4975155472559461469.jpg size=1024x1024 pixels=4194304 ktx2=0 mipLevels=11
+[22:15:42.004]   glTF texture[36]: uri=2299742237651021498.jpg size=1024x1024 pixels=4194304 ktx2=0 mipLevels=11
+[22:15:42.004]   glTF texture[38]: uri=3371964815757888145.jpg size=1024x1024 pixels=4194304 ktx2=0 mipLevels=11
+[22:15:42.008] Skipping runtime mip generation for raw glTF texture: uri=5792855332885324923.jpg size=1024x1024 requestedMipLevels=11
+[22:15:42.009] Skipping runtime mip generation for raw glTF texture: uri=16299174074766089871.jpg size=1024x1024 requestedMipLevels=11
+[22:15:42.010] Skipping runtime mip generation for raw glTF texture: uri=11968150294050148237.jpg size=1024x1024 requestedMipLevels=11
+[22:15:42.010] Skipping runtime mip generation for raw glTF texture: uri=2185409758123873465.jpg size=1024x1024 requestedMipLevels=11
+[22:15:42.011] Skipping runtime mip generation for raw glTF texture: uri=332936164838540657.jpg size=1024x1024 requestedMipLevels=11
+[22:15:42.013] Skipping runtime mip generation for raw glTF texture: uri=8481240838833932244.jpg size=1024x1024 requestedMipLevels=11
+[22:15:42.014] Skipping runtime mip generation for raw glTF texture: uri=10381718147657362067.jpg size=1024x1024 requestedMipLevels=11
+[22:15:42.015] Skipping runtime mip generation for raw glTF texture: uri=17556969131407844942.jpg size=1024x1024 requestedMipLevels=11
+[22:15:42.015] Skipping runtime mip generation for raw glTF texture: uri=6047387724914829168.jpg size=1024x1024 requestedMipLevels=11
+[22:15:42.016] Skipping runtime mip generation for raw glTF texture: uri=15722799267630235092.jpg size=1024x1024 requestedMipLevels=11
+[22:15:42.016] Skipping runtime mip generation for raw glTF texture: uri=8051790464816141987.jpg size=1024x1024 requestedMipLevels=11
+[22:15:42.017] Skipping runtime mip generation for raw glTF texture: uri=4975155472559461469.jpg size=1024x1024 requestedMipLevels=11
+[22:15:42.018] Skipping runtime mip generation for raw glTF texture: uri=2299742237651021498.jpg size=1024x1024 requestedMipLevels=11
+[22:15:42.018] Skipping runtime mip generation for raw glTF texture: uri=3371964815757888145.jpg size=1024x1024 requestedMipLevels=11
+[22:15:42.351] Scene upload batch: critical=0 final=0 textures=16 materials=6 meshes=46
+[22:15:42.353] Upload memory snapshot: pendingUploads=0 rendererStaging=3 buffers 61.02 MiB meshPoolDeferred=0 buffers 0.00 MiB
+[22:15:42.355] Upload memory snapshot after renderer staging free: rendererStaging=0 buffers meshPoolDeferred=0 buffers 0.00 MiB
+[22:15:42.356] glTF upload batch: textures=16 materials=6 meshes=46 textureBytes=62914688 meshBytes=4690772 totalBytes=67605460 mipGenTextures=16 maxTexture=1024x1024
+[22:15:42.356]   glTF texture[19]: uri=15295713303328085182.jpg size=1024x1024 pixels=4194304 ktx2=0 mipLevels=11
+[22:15:42.356]   glTF texture[18]: uri=10388182081421875623.jpg size=1024x1024 pixels=4194304 ktx2=0 mipLevels=11
+[22:15:42.356]   glTF texture[20]: uri=9916269861720640319.jpg size=1024x1024 pixels=4194304 ktx2=0 mipLevels=11
+[22:15:42.356]   glTF texture[16]: uri=14650633544276105767.jpg size=1024x1024 pixels=4194304 ktx2=0 mipLevels=11
+[22:15:42.357]   glTF texture[15]: uri=2051777328469649772.jpg size=1024x1024 pixels=4194304 ktx2=0 mipLevels=11
+[22:15:42.357]   glTF texture[17]: uri=4871783166746854860.jpg size=1024x1024 pixels=4194304 ktx2=0 mipLevels=11
+[22:15:42.357]   glTF texture[25]: uri=5823059166183034438.jpg size=1024x1024 pixels=4194304 ktx2=0 mipLevels=11
+[22:15:42.357]   glTF texture[24]: uri=14267839433702832875.jpg size=1024x1024 pixels=4194304 ktx2=0 mipLevels=11
+[22:15:42.357]   glTF texture[26]: uri=13824894030729245199.jpg size=1024x1024 pixels=4194304 ktx2=0 mipLevels=11
+[22:15:42.357]   glTF texture[28]: uri=7441062115984513793.jpg size=1024x1024 pixels=4194304 ktx2=0 mipLevels=11
+[22:15:42.357]   glTF texture[27]: uri=6667038893015345571.jpg size=1024x1024 pixels=4194304 ktx2=0 mipLevels=11
+[22:15:42.358]   glTF texture[29]: uri=8114461559286000061.jpg size=1024x1024 pixels=4194304 ktx2=0 mipLevels=11
+[22:15:42.358]   glTF texture[34]: uri=6151467286084645207.jpg size=1024x1024 pixels=4194304 ktx2=0 mipLevels=11
+[22:15:42.358]   glTF texture[33]: uri=7645212358685992005.jpg size=1024x1024 pixels=4194304 ktx2=0 mipLevels=11
+[22:15:42.358]   glTF texture[35]: uri=8783994986360286082.jpg size=1024x1024 pixels=4194304 ktx2=0 mipLevels=11
+[22:15:42.358]   glTF texture[68]: uri=white.png size=4x4 pixels=64 ktx2=0 mipLevels=3
+[22:15:42.359] Skipping runtime mip generation for raw glTF texture: uri=15295713303328085182.jpg size=1024x1024 requestedMipLevels=11
+[22:15:42.360] Skipping runtime mip generation for raw glTF texture: uri=10388182081421875623.jpg size=1024x1024 requestedMipLevels=11
+[22:15:42.361] Skipping runtime mip generation for raw glTF texture: uri=9916269861720640319.jpg size=1024x1024 requestedMipLevels=11
+[22:15:42.361] Skipping runtime mip generation for raw glTF texture: uri=14650633544276105767.jpg size=1024x1024 requestedMipLevels=11
+[22:15:42.362] Skipping runtime mip generation for raw glTF texture: uri=2051777328469649772.jpg size=1024x1024 requestedMipLevels=11
+[22:15:42.362] Skipping runtime mip generation for raw glTF texture: uri=4871783166746854860.jpg size=1024x1024 requestedMipLevels=11
+[22:15:42.363] Skipping runtime mip generation for raw glTF texture: uri=5823059166183034438.jpg size=1024x1024 requestedMipLevels=11
+[22:15:42.364] Skipping runtime mip generation for raw glTF texture: uri=14267839433702832875.jpg size=1024x1024 requestedMipLevels=11
+[22:15:42.365] Skipping runtime mip generation for raw glTF texture: uri=13824894030729245199.jpg size=1024x1024 requestedMipLevels=11
+[22:15:42.365] Skipping runtime mip generation for raw glTF texture: uri=7441062115984513793.jpg size=1024x1024 requestedMipLevels=11
+[22:15:42.366] Skipping runtime mip generation for raw glTF texture: uri=6667038893015345571.jpg size=1024x1024 requestedMipLevels=11
+[22:15:42.367] Skipping runtime mip generation for raw glTF texture: uri=8114461559286000061.jpg size=1024x1024 requestedMipLevels=11
+[22:15:42.367] Skipping runtime mip generation for raw glTF texture: uri=6151467286084645207.jpg size=1024x1024 requestedMipLevels=11
+[22:15:42.368] Skipping runtime mip generation for raw glTF texture: uri=7645212358685992005.jpg size=1024x1024 requestedMipLevels=11
+[22:15:42.369] Skipping runtime mip generation for raw glTF texture: uri=8783994986360286082.jpg size=1024x1024 requestedMipLevels=11
+[22:15:42.369] Skipping runtime mip generation for raw glTF texture: uri=white.png size=4x4 requestedMipLevels=3
+[22:15:42.860] Scene upload batch: critical=0 final=1 textures=3 materials=1 meshes=26
+[22:15:42.864] Upload memory snapshot: pendingUploads=0 rendererStaging=3 buffers 69.49 MiB meshPoolDeferred=2 buffers 6.00 MiB
+[22:15:42.865] Upload memory snapshot after renderer staging free: rendererStaging=0 buffers meshPoolDeferred=0 buffers 0.00 MiB
+[22:15:42.865] glTF upload batch: textures=3 materials=1 meshes=26 textureBytes=12582924 meshBytes=2436412 totalBytes=15019336 mipGenTextures=3 maxTexture=1024x1024
+[22:15:42.866]   glTF texture[66]: uri=2969916736137545357.jpg size=1024x1024 pixels=4194304 ktx2=0 mipLevels=11
+[22:15:42.866]   glTF texture[65]: uri=14118779221266351425.jpg size=1024x1024 pixels=4194304 ktx2=0 mipLevels=11
+[22:15:42.866]   glTF texture[67]: uri=8747919177698443163.jpg size=1024x1024 pixels=4194304 ktx2=0 mipLevels=11
+[22:15:42.866] Skipping runtime mip generation for raw glTF texture: uri=2969916736137545357.jpg size=1024x1024 requestedMipLevels=11
+[22:15:42.867] Skipping runtime mip generation for raw glTF texture: uri=14118779221266351425.jpg size=1024x1024 requestedMipLevels=11
+[22:15:42.868] Skipping runtime mip generation for raw glTF texture: uri=8747919177698443163.jpg size=1024x1024 requestedMipLevels=11
+[22:15:43.180] Upload memory snapshot: pendingUploads=0 rendererStaging=3 buffers 23.81 MiB meshPoolDeferred=1 buffers 8.00 MiB
+[22:15:43.181] Upload memory snapshot after renderer staging free: rendererStaging=0 buffers meshPoolDeferred=0 buffers 0.00 MiB
+[22:15:43.211] Generated 128 animated random point lights for LightCoarseCulling
