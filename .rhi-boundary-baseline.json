@@ -3,8 +3,8 @@
   "description": "Phase 1 baseline snapshot \u2014 honest count of existing violations. Ratchet down per phase.",
   "signals": {
     "backend_include": {
-      "total": 20,
-      "header_only": 8,
+      "total": 17,
+      "header_only": 5,
       "files": {
         "render/BatchUploadContext.cpp": {
           "total": 1,
@@ -43,38 +43,22 @@
           "header": 0
         },
         "render/RenderDevice.cpp": {
-          "total": 4,
+          "total": 5,
           "header": 0
         },
         "render/RenderDevice.h": {
           "total": 2,
           "header": 2
         },
-        "render/RendererFacade.cpp": {
-          "total": 1,
-          "header": 0
-        },
         "render/UploadUtils.cpp": {
           "total": 1,
           "header": 0
-        },
-        "scene/SceneAsset.h": {
-          "total": 1,
-          "header": 1
-        },
-        "scene/SceneUploadPlan.h": {
-          "total": 1,
-          "header": 1
-        },
-        "loader/Ktx2Loader.h": {
-          "total": 1,
-          "header": 1
         }
       }
     },
     "vk_token": {
-      "total": 1030,
-      "header_only": 31,
+      "total": 1018,
+      "header_only": 21,
       "files": {
         "render/GPUDrivenRenderer.cpp": {
           "total": 225,
@@ -124,29 +108,9 @@
           "total": 1,
           "header": 0
         },
-        "scene/SceneAsset.h": {
-          "total": 2,
-          "header": 2
-        },
-        "scene/SceneAssetBuilder.cpp": {
-          "total": 1,
-          "header": 0
-        },
-        "scene/SceneUploadPlan.h": {
-          "total": 4,
-          "header": 4
-        },
-        "scene/SceneUploadPlanner.cpp": {
-          "total": 1,
-          "header": 0
-        },
         "loader/Ktx2Loader.cpp": {
           "total": 1,
           "header": 0
-        },
-        "loader/Ktx2Loader.h": {
-          "total": 4,
-          "header": 4
         }
       }
     },
