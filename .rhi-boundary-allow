@@ -15,6 +15,12 @@ backend_impl: rhi/vulkan/
 backend_impl: rhi/d3d12/
 backend_impl: rhi/metal/
 
+# --- Format bridge (render layer) ---------------------------------------------
+# RHIFormatBridge.h is the deliberate VkFormat <-> rhi::TextureFormat seam.
+# Its sole job is format translation inside the render layer; VK_FORMAT_* tokens
+# here are structural (mapping table), not violations (D-02, Phase 2 Wave 1).
+render_bridge: render/RHIFormatBridge.h
+
 # --- Debug bridge -------------------------------------------------------------
 # ImGui Vulkan backend adapter requires native VkDevice/VkInstance handles.
 # This is a direct platform interop file, not business logic.

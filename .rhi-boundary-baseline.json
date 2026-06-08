@@ -1,65 +1,183 @@
 {
   "version": 1,
-  "description": "Phase 1 baseline snapshot — honest count of existing violations (working tree, post-WIP). Ratchet down per phase.",
+  "description": "Phase 1 baseline snapshot \u2014 honest count of existing violations. Ratchet down per phase.",
   "signals": {
     "backend_include": {
-      "total": 21,
-      "header_only": 11,
+      "total": 20,
+      "header_only": 8,
       "files": {
-        "loader/Ktx2Loader.h": {"total": 1, "header": 1},
-        "render/BatchUploadContext.cpp": {"total": 1, "header": 0},
-        "render/GPUDrivenLightResources.h": {"total": 1, "header": 1},
-        "render/GPUMeshletBuffer.cpp": {"total": 1, "header": 0},
-        "render/GPUSceneRegistry.cpp": {"total": 1, "header": 0},
-        "render/HiZDepthPyramid.cpp": {"total": 1, "header": 0},
-        "render/HiZDepthPyramid.h": {"total": 1, "header": 1},
-        "render/IBLResources.cpp": {"total": 1, "header": 0},
-        "render/MeshPool.cpp": {"total": 1, "header": 0},
-        "render/MeshletConverter.h": {"total": 1, "header": 1},
-        "render/RHIFormatBridge.h": {"total": 1, "header": 1},
-        "render/RenderDevice.cpp": {"total": 4, "header": 0},
-        "render/RenderDevice.h": {"total": 2, "header": 2},
-        "render/RendererFacade.cpp": {"total": 1, "header": 0},
-        "render/UploadUtils.cpp": {"total": 1, "header": 0},
-        "scene/SceneAsset.h": {"total": 1, "header": 1},
-        "scene/SceneUploadPlan.h": {"total": 1, "header": 1}
+        "render/BatchUploadContext.cpp": {
+          "total": 1,
+          "header": 0
+        },
+        "render/GPUDrivenLightResources.h": {
+          "total": 1,
+          "header": 1
+        },
+        "render/GPUMeshletBuffer.cpp": {
+          "total": 1,
+          "header": 0
+        },
+        "render/GPUSceneRegistry.cpp": {
+          "total": 1,
+          "header": 0
+        },
+        "render/HiZDepthPyramid.cpp": {
+          "total": 1,
+          "header": 0
+        },
+        "render/HiZDepthPyramid.h": {
+          "total": 1,
+          "header": 1
+        },
+        "render/IBLResources.cpp": {
+          "total": 1,
+          "header": 0
+        },
+        "render/MeshletConverter.h": {
+          "total": 1,
+          "header": 1
+        },
+        "render/MeshPool.cpp": {
+          "total": 1,
+          "header": 0
+        },
+        "render/RenderDevice.cpp": {
+          "total": 4,
+          "header": 0
+        },
+        "render/RenderDevice.h": {
+          "total": 2,
+          "header": 2
+        },
+        "render/RendererFacade.cpp": {
+          "total": 1,
+          "header": 0
+        },
+        "render/UploadUtils.cpp": {
+          "total": 1,
+          "header": 0
+        },
+        "scene/SceneAsset.h": {
+          "total": 1,
+          "header": 1
+        },
+        "scene/SceneUploadPlan.h": {
+          "total": 1,
+          "header": 1
+        },
+        "loader/Ktx2Loader.h": {
+          "total": 1,
+          "header": 1
+        }
       }
     },
     "vk_token": {
-      "total": 1040,
-      "header_only": 42,
+      "total": 1030,
+      "header_only": 31,
       "files": {
-        "loader/Ktx2Loader.cpp": {"total": 1, "header": 0},
-        "loader/Ktx2Loader.h": {"total": 4, "header": 4},
-        "render/GPUDrivenRenderer.cpp": {"total": 225, "header": 0},
-        "render/GPUMeshletBuffer.cpp": {"total": 52, "header": 0},
-        "render/GPUSceneRegistry.cpp": {"total": 47, "header": 0},
-        "render/HiZDepthPyramid.cpp": {"total": 48, "header": 0},
-        "render/HiZDepthPyramid.h": {"total": 16, "header": 16},
-        "render/IBLResources.cpp": {"total": 70, "header": 0},
-        "render/MeshPool.cpp": {"total": 20, "header": 0},
-        "render/RHIFormatBridge.h": {"total": 10, "header": 10},
-        "render/RenderDevice.cpp": {"total": 489, "header": 0},
-        "render/RenderDevice.h": {"total": 5, "header": 5},
-        "render/SceneResources.cpp": {"total": 17, "header": 0},
-        "render/UploadUtils.cpp": {"total": 27, "header": 0},
-        "scene/ParallelSceneLoader.cpp": {"total": 1, "header": 0},
-        "scene/SceneAsset.h": {"total": 2, "header": 2},
-        "scene/SceneAssetBuilder.cpp": {"total": 1, "header": 0},
-        "scene/SceneUploadPlan.h": {"total": 4, "header": 4},
-        "scene/SceneUploadPlanner.cpp": {"total": 1, "header": 0}
+        "render/GPUDrivenRenderer.cpp": {
+          "total": 225,
+          "header": 0
+        },
+        "render/GPUMeshletBuffer.cpp": {
+          "total": 52,
+          "header": 0
+        },
+        "render/GPUSceneRegistry.cpp": {
+          "total": 47,
+          "header": 0
+        },
+        "render/HiZDepthPyramid.cpp": {
+          "total": 48,
+          "header": 0
+        },
+        "render/HiZDepthPyramid.h": {
+          "total": 16,
+          "header": 16
+        },
+        "render/IBLResources.cpp": {
+          "total": 70,
+          "header": 0
+        },
+        "render/MeshPool.cpp": {
+          "total": 20,
+          "header": 0
+        },
+        "render/RenderDevice.cpp": {
+          "total": 489,
+          "header": 0
+        },
+        "render/RenderDevice.h": {
+          "total": 5,
+          "header": 5
+        },
+        "render/SceneResources.cpp": {
+          "total": 17,
+          "header": 0
+        },
+        "render/UploadUtils.cpp": {
+          "total": 27,
+          "header": 0
+        },
+        "scene/ParallelSceneLoader.cpp": {
+          "total": 1,
+          "header": 0
+        },
+        "scene/SceneAsset.h": {
+          "total": 2,
+          "header": 2
+        },
+        "scene/SceneAssetBuilder.cpp": {
+          "total": 1,
+          "header": 0
+        },
+        "scene/SceneUploadPlan.h": {
+          "total": 4,
+          "header": 4
+        },
+        "scene/SceneUploadPlanner.cpp": {
+          "total": 1,
+          "header": 0
+        },
+        "loader/Ktx2Loader.cpp": {
+          "total": 1,
+          "header": 0
+        },
+        "loader/Ktx2Loader.h": {
+          "total": 4,
+          "header": 4
+        }
       }
     },
     "native_getter": {
       "total": 64,
       "header_only": 0,
       "files": {
-        "render/GPUDrivenRenderer.cpp": {"total": 1, "header": 0},
-        "render/HiZDepthPyramid.cpp": {"total": 1, "header": 0},
-        "render/IBLResources.cpp": {"total": 2, "header": 0},
-        "render/LightResources.cpp": {"total": 1, "header": 0},
-        "render/RenderDevice.cpp": {"total": 55, "header": 0},
-        "render/SceneResources.cpp": {"total": 4, "header": 0}
+        "render/GPUDrivenRenderer.cpp": {
+          "total": 1,
+          "header": 0
+        },
+        "render/HiZDepthPyramid.cpp": {
+          "total": 1,
+          "header": 0
+        },
+        "render/IBLResources.cpp": {
+          "total": 2,
+          "header": 0
+        },
+        "render/LightResources.cpp": {
+          "total": 1,
+          "header": 0
+        },
+        "render/RenderDevice.cpp": {
+          "total": 55,
+          "header": 0
+        },
+        "render/SceneResources.cpp": {
+          "total": 4,
+          "header": 0
+        }
       }
     }
   }
