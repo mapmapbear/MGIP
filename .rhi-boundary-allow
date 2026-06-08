@@ -26,12 +26,6 @@ render_bridge: render/RHIFormatBridge.h
 # This is a direct platform interop file, not business logic.
 debug_bridge: render/passes/GPUDrivenImguiPass.cpp
 
-# --- Legacy Vulkan helper layer -----------------------------------------------
-# gfx/ is a legacy Vulkan helper layer (Context, ResourceAllocator, SamplerPool).
-# Phase 3 cleanup target — temporarily exempted until gfx/ helpers are replaced
-# by RHI/backend-neutral services or moved into rhi/vulkan/.
-legacy_vulkan_helper: gfx/
-
 # --- Build artifacts / shader autogen ----------------------------------------
 # These are generated files, not authored source. Hard-excluded by EXCLUDE_PATTERNS
 # too, but listed here for clarity.
