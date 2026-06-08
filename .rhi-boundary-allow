@@ -1,0 +1,33 @@
+# .rhi-boundary-allow
+# RHI boundary guard exemption list.
+# Format: <category>: <path-prefix>
+# Lines starting with '#' are comments; blank lines are ignored.
+# The path-prefix (right of ':') is matched against relative file paths
+# using startswith(). All paths use forward slashes.
+#
+# Decisions: D-04 (independent manifest file), D-05 (exemption scope).
+# See .planning/phases/01-boundary-guard-baseline/01-CONTEXT.md for rationale.
+
+# --- Backend implementations -----------------------------------------------
+# These directories ARE the Vulkan/D3D12/Metal implementations — native API
+# usage is their explicit job. Not violations.
+backend_impl: rhi/vulkan/
+backend_impl: rhi/d3d12/
+backend_impl: rhi/metal/
+
+# --- Debug bridge -------------------------------------------------------------
+# ImGui Vulkan backend adapter requires native VkDevice/VkInstance handles.
+# This is a direct platform interop file, not business logic.
+debug_bridge: render/passes/GPUDrivenImguiPass.cpp
+
+# --- Legacy Vulkan helper layer -----------------------------------------------
+# gfx/ is a legacy Vulkan helper layer (Context, ResourceAllocator, SamplerPool).
+# Phase 3 cleanup target — temporarily exempted until gfx/ helpers are replaced
+# by RHI/backend-neutral services or moved into rhi/vulkan/.
+legacy_vulkan_helper: gfx/
+
+# --- Build artifacts / shader autogen ----------------------------------------
+# These are generated files, not authored source. Hard-excluded by EXCLUDE_PATTERNS
+# too, but listed here for clarity.
+generated: _autogen/
+generated: android/app/.cxx/
