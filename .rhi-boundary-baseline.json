@@ -1,90 +1,16 @@
 {
   "version": 1,
-  "description": "Phase 1 baseline snapshot \u2014 honest count of existing violations. Ratchet down per phase.",
+  "description": "Phase 7 freeze — all signals zeroed. Any violation above 0 is a regression. Frozen at Phase 7 milestone acceptance.",
   "signals": {
     "backend_include": {
-      "total": 15,
-      "header_only": 5,
-      "files": {
-        "render/BatchUploadContext.cpp": {
-          "total": 1,
-          "header": 0
-        },
-        "render/GPUDrivenLightResources.h": {
-          "total": 1,
-          "header": 1
-        },
-        "render/GPUMeshletBuffer.cpp": {
-          "total": 1,
-          "header": 0
-        },
-        "render/GPUSceneRegistry.cpp": {
-          "total": 1,
-          "header": 0
-        },
-        "render/HiZDepthPyramid.h": {
-          "total": 1,
-          "header": 1
-        },
-        "render/MeshletConverter.h": {
-          "total": 1,
-          "header": 1
-        },
-        "render/MeshPool.cpp": {
-          "total": 1,
-          "header": 0
-        },
-        "render/RenderDevice.cpp": {
-          "total": 5,
-          "header": 0
-        },
-        "render/RenderDevice.h": {
-          "total": 2,
-          "header": 2
-        },
-        "render/UploadUtils.cpp": {
-          "total": 1,
-          "header": 0
-        }
-      }
+      "total": 0,
+      "header_only": 0,
+      "files": {}
     },
     "vk_token": {
-      "total": 522,
-      "header_only": 21,
-      "files": {
-        "render/GPUMeshletBuffer.cpp": {
-          "total": 52,
-          "header": 0
-        },
-        "render/GPUSceneRegistry.cpp": {
-          "total": 47,
-          "header": 0
-        },
-        "render/HiZDepthPyramid.h": {
-          "total": 16,
-          "header": 16
-        },
-        "render/MeshPool.cpp": {
-          "total": 20,
-          "header": 0
-        },
-        "render/RenderDevice.cpp": {
-          "total": 354,
-          "header": 0
-        },
-        "render/RenderDevice.h": {
-          "total": 5,
-          "header": 5
-        },
-        "render/UploadUtils.cpp": {
-          "total": 27,
-          "header": 0
-        },
-        "loader/Ktx2Loader.cpp": {
-          "total": 1,
-          "header": 0
-        }
-      }
+      "total": 0,
+      "header_only": 0,
+      "files": {}
     },
     "native_getter": {
       "total": 0,
