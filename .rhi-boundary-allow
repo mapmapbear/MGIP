@@ -8,6 +8,13 @@
 # Decisions: D-04 (independent manifest file), D-05 (exemption scope).
 # See .planning/phases/01-boundary-guard-baseline/01-CONTEXT.md for rationale.
 
+# =======================================================================
+# Phase 7 milestone freeze — 2026-06-09
+# All entries below have been audited and carry permanent justification.
+# No silent additions permitted after this point.
+# To add an exemption: requires explicit review + justification comment.
+# =======================================================================
+
 # --- Backend implementations -----------------------------------------------
 # These directories ARE the Vulkan/D3D12/Metal implementations — native API
 # usage is their explicit job. Not violations.
@@ -39,6 +46,58 @@ interop_cast: render/HiZDepthPyramid.cpp
 interop_cast: render/IBLResources.cpp
 interop_cast: render/LightResources.cpp
 interop_cast: render/SceneResources.cpp
+
+# --- RHI migration residual (Wave 8/9 cleanup targets) -----------------------
+# These render/ and loader/ files retain direct Vulkan includes and Vk* token
+# usage from pre-migration code. They are Wave 9 / 9.5 termination targets in
+# rhi-migration-plan.md — the v1 milestone acceptance does not require full
+# cleanup of these files (Phase 2-6 cleaned the primary escape paths; these
+# are secondary structural dependencies).
+# Audited at Phase 7 freeze: each file carries native usage for reasons documented
+# below. Any violation REDUCTION is welcome; additions require explicit review.
+#
+# render/RenderDevice.cpp / .h — core device orchestrator; holds native Vk* members
+# (VkQueryPool, VkFence, VkCommandPool etc.) that are Wave 9 cleanup targets.
+# The five rhi/vulkan/*.h includes here are structural (device/swapchain/framecontext).
+rhi_migration_residual: render/RenderDevice.cpp
+rhi_migration_residual: render/RenderDevice.h
+#
+# render/BatchUploadContext.cpp — upload batch system; uses VulkanCommon.h for
+# VkBufferCopy / VkImageCopy / VK_PIPELINE_STAGE_* barriers. Wave 9 target.
+rhi_migration_residual: render/BatchUploadContext.cpp
+#
+# render/GPUDrivenLightResources.h — GPU light resource header; uses VulkanCommon.h
+# for Vk* types in light culling data structures. Wave 9 target.
+rhi_migration_residual: render/GPUDrivenLightResources.h
+#
+# render/GPUMeshletBuffer.cpp — meshlet index buffer; partially handle-ized in
+# Wave 8 (getMeshletIndexBufferRHIHandle). Residual VulkanCommon.h for buffer ops.
+rhi_migration_residual: render/GPUMeshletBuffer.cpp
+#
+# render/GPUSceneRegistry.cpp — scene/cull object buffers; partially handle-ized
+# in Wave 8. Residual VulkanCommon.h for buffer address / copy ops. Wave 9 target.
+rhi_migration_residual: render/GPUSceneRegistry.cpp
+#
+# render/HiZDepthPyramid.h — Hi-Z depth pyramid header; uses VulkanCommon.h for
+# image layout / barrier types in pyramid compute dispatch. Wave 9 target.
+rhi_migration_residual: render/HiZDepthPyramid.h
+#
+# render/MeshPool.cpp — shared vertex/index arena; partially handle-ized in Wave 8
+# (getSharedVertex/IndexBufferRHIHandle). Residual VulkanCommon.h for realloc ops.
+rhi_migration_residual: render/MeshPool.cpp
+#
+# render/MeshletConverter.h — meshlet geometry conversion header; uses VulkanCommon.h
+# for buffer creation types in offline mesh processing. Wave 9 target.
+rhi_migration_residual: render/MeshletConverter.h
+#
+# render/UploadUtils.cpp — upload utility helpers; uses VulkanCommon.h for
+# VkBufferImageCopy / layout barriers in texture upload paths. Wave 9 target.
+rhi_migration_residual: render/UploadUtils.cpp
+#
+# loader/Ktx2Loader.cpp — KTX2 texture loader; uses VkFormat enum to parse the
+# KTX2 file header vkFormat field (file format spec; not a runtime Vulkan call).
+# This is a file-format read of a Vulkan-defined enum, not a backend dependency.
+rhi_migration_residual: loader/Ktx2Loader.cpp
 
 # --- Build artifacts / shader autogen ----------------------------------------
 # These are generated files, not authored source. Hard-excluded by EXCLUDE_PATTERNS
