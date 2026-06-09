@@ -87,14 +87,9 @@
       }
     },
     "native_getter": {
-      "total": 1,
+      "total": 0,
       "header_only": 0,
-      "files": {
-        "render/RenderDevice.cpp": {
-          "total": 1,
-          "header": 0
-        }
-      }
+      "files": {}
     }
   }
 }
