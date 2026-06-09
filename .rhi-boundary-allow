@@ -29,6 +29,17 @@ debug_bridge: render/passes/GPUDrivenImguiPass.cpp
 # All VkDevice/VkDescriptorPool/ImGui_ImplVulkan_* calls are confined here.
 debug_bridge: render/DebugInteropBridge.cpp
 
+# --- Interop cast sites (D-07) -----------------------------------------------
+# These render/ files use static_cast<VulkanDevice&> / static_cast<VulkanDeviceInterop&>
+# to access typed native handles (D-07 sanctioned path, replaces public escape getters).
+# Each include of rhi/vulkan/VulkanDevice.h here is intentional backend interop, not
+# a public API leak.
+interop_cast: render/GPUDrivenRenderer.cpp
+interop_cast: render/HiZDepthPyramid.cpp
+interop_cast: render/IBLResources.cpp
+interop_cast: render/LightResources.cpp
+interop_cast: render/SceneResources.cpp
+
 # --- Build artifacts / shader autogen ----------------------------------------
 # These are generated files, not authored source. Hard-excluded by EXCLUDE_PATTERNS
 # too, but listed here for clarity.
