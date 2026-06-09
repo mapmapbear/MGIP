@@ -42,6 +42,7 @@ debug_bridge: render/DebugInteropBridge.cpp
 # Each include of rhi/vulkan/VulkanDevice.h here is intentional backend interop, not
 # a public API leak.
 interop_cast: render/GPUDrivenRenderer.cpp
+interop_cast: render/HiZDepthPyramid.cpp
 interop_cast: render/IBLResources.cpp
 interop_cast: render/LightResources.cpp
 interop_cast: render/SceneResources.cpp
@@ -77,6 +78,9 @@ rhi_migration_residual: render/GPUMeshletBuffer.cpp
 # in Wave 8. Residual VulkanCommon.h for buffer address / copy ops. Wave 9 target.
 rhi_migration_residual: render/GPUSceneRegistry.cpp
 #
+# render/HiZDepthPyramid.h — Hi-Z depth pyramid header; uses VulkanCommon.h for
+# image layout / barrier types in pyramid compute dispatch. Wave 9 target.
+rhi_migration_residual: render/HiZDepthPyramid.h
 #
 # render/MeshPool.cpp — shared vertex/index arena; partially handle-ized in Wave 8
 # (getSharedVertex/IndexBufferRHIHandle). Residual VulkanCommon.h for realloc ops.
