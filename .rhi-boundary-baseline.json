@@ -57,7 +57,7 @@
       }
     },
     "vk_token": {
-      "total": 895,
+      "total": 878,
       "header_only": 21,
       "files": {
         "render/GPUDrivenRenderer.cpp": {
@@ -89,7 +89,7 @@
           "header": 0
         },
         "render/RenderDevice.cpp": {
-          "total": 396,
+          "total": 379,
           "header": 0
         },
         "render/RenderDevice.h": {
@@ -111,7 +111,7 @@
       }
     },
     "native_getter": {
-      "total": 38,
+      "total": 36,
       "header_only": 0,
       "files": {
         "render/GPUDrivenRenderer.cpp": {
@@ -131,7 +131,7 @@
           "header": 0
         },
         "render/RenderDevice.cpp": {
-          "total": 29,
+          "total": 27,
           "header": 0
         },
         "render/SceneResources.cpp": {
