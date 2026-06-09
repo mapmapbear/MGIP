@@ -25,6 +25,9 @@ render_bridge: render/RHIFormatBridge.h
 # ImGui Vulkan backend adapter requires native VkDevice/VkInstance handles.
 # This is a direct platform interop file, not business logic.
 debug_bridge: render/passes/GPUDrivenImguiPass.cpp
+# DebugInteropBridge: sanctioned ImGui/Tracy native exception (D-08/D-09).
+# All VkDevice/VkDescriptorPool/ImGui_ImplVulkan_* calls are confined here.
+debug_bridge: render/DebugInteropBridge.cpp
 
 # --- Build artifacts / shader autogen ----------------------------------------
 # These are generated files, not authored source. Hard-excluded by EXCLUDE_PATTERNS
