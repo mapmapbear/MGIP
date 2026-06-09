@@ -57,11 +57,11 @@
       }
     },
     "vk_token": {
-      "total": 944,
+      "total": 915,
       "header_only": 21,
       "files": {
         "render/GPUDrivenRenderer.cpp": {
-          "total": 225,
+          "total": 207,
           "header": 0
         },
         "render/GPUMeshletBuffer.cpp": {
@@ -73,7 +73,7 @@
           "header": 0
         },
         "render/HiZDepthPyramid.cpp": {
-          "total": 48,
+          "total": 47,
           "header": 0
         },
         "render/HiZDepthPyramid.h": {
@@ -81,7 +81,7 @@
           "header": 16
         },
         "render/IBLResources.cpp": {
-          "total": 70,
+          "total": 60,
           "header": 0
         },
         "render/MeshPool.cpp": {
