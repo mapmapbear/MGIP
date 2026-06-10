@@ -60,14 +60,6 @@ interop_cast: render/SceneResources.cpp
 rhi_migration_residual: render/RenderDevice.cpp
 rhi_migration_residual: render/RenderDevice.h
 #
-# render/BatchUploadContext.cpp — upload batch system; uses VulkanCommon.h for
-# VkBufferCopy / VkImageCopy / VK_PIPELINE_STAGE_* barriers. Wave 9 target.
-rhi_migration_residual: render/BatchUploadContext.cpp
-#
-# render/GPUDrivenLightResources.h — GPU light resource header; uses VulkanCommon.h
-# for Vk* types in light culling data structures. Wave 9 target.
-rhi_migration_residual: render/GPUDrivenLightResources.h
-#
 # render/GPUMeshletBuffer.cpp — meshlet index buffer; partially handle-ized in
 # Wave 8 (getMeshletIndexBufferRHIHandle). Residual VulkanCommon.h for buffer ops.
 rhi_migration_residual: render/GPUMeshletBuffer.cpp
@@ -80,10 +72,6 @@ rhi_migration_residual: render/GPUSceneRegistry.cpp
 # render/MeshPool.cpp — shared vertex/index arena; partially handle-ized in Wave 8
 # (getSharedVertex/IndexBufferRHIHandle). Residual VulkanCommon.h for realloc ops.
 rhi_migration_residual: render/MeshPool.cpp
-#
-# render/MeshletConverter.h — meshlet geometry conversion header; uses VulkanCommon.h
-# for buffer creation types in offline mesh processing. Wave 9 target.
-rhi_migration_residual: render/MeshletConverter.h
 #
 # render/UploadUtils.cpp — upload utility helpers; uses VulkanCommon.h for
 # VkBufferImageCopy / layout barriers in texture upload paths. Wave 9 target.
