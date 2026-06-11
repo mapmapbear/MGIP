@@ -61,14 +61,6 @@ interop_cast: render/SceneResources.cpp
 rhi_migration_residual: render/RenderDevice.cpp
 rhi_migration_residual: render/RenderDevice.h
 #
-# render/GPUMeshletBuffer.cpp — meshlet index buffer; partially handle-ized in
-# Wave 8 (getMeshletIndexBufferRHIHandle). Residual VulkanCommon.h for buffer ops.
-rhi_migration_residual: render/GPUMeshletBuffer.cpp
-#
-# render/GPUSceneRegistry.cpp — scene/cull object buffers; partially handle-ized
-# in Wave 8. Residual VulkanCommon.h for buffer address / copy ops. Wave 9 target.
-rhi_migration_residual: render/GPUSceneRegistry.cpp
-#
 #
 # render/MeshPool.cpp — shared vertex/index arena; partially handle-ized in Wave 8
 # (getSharedVertex/IndexBufferRHIHandle). Residual VulkanCommon.h for realloc ops.
