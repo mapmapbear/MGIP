@@ -54,9 +54,10 @@ interop_cast: render/SceneResources.cpp
 # Audited at Phase 7 freeze: each file carries native usage for reasons documented
 # below. Any violation REDUCTION is welcome; additions require explicit review.
 #
-# render/RenderDevice.cpp / .h — core device orchestrator; holds native Vk* members
-# (VkQueryPool, VkFence, VkCommandPool etc.) that are Wave 9 cleanup targets.
-# The five rhi/vulkan/*.h includes here are structural (device/swapchain/framecontext).
+# render/RenderDevice.cpp / .h — VkFormat residual cleared in Phase 2 Wave C (02-03).
+# Remaining Vk* usage (VkQueryPool, VkFence, VkSampler, VkCommandPool) are
+# Wave 9 targets outside this milestone scope. Exemption retained for those.
+# RDEV-03/RDEV-04 completed: selectSwapchainImageFormat/toVkFormat/string_VkFormat removed.
 rhi_migration_residual: render/RenderDevice.cpp
 rhi_migration_residual: render/RenderDevice.h
 #
