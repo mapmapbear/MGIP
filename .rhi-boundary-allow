@@ -62,14 +62,6 @@ rhi_migration_residual: render/RenderDevice.cpp
 rhi_migration_residual: render/RenderDevice.h
 #
 #
-# render/MeshPool.cpp — shared vertex/index arena; partially handle-ized in Wave 8
-# (getSharedVertex/IndexBufferRHIHandle). Residual VulkanCommon.h for realloc ops.
-rhi_migration_residual: render/MeshPool.cpp
-#
-# render/UploadUtils.cpp — upload utility helpers; uses VulkanCommon.h for
-# VkBufferImageCopy / layout barriers in texture upload paths. Wave 9 target.
-rhi_migration_residual: render/UploadUtils.cpp
-#
 # loader/Ktx2Loader.cpp — KTX2 texture loader; uses VkFormat enum to parse the
 # KTX2 file header vkFormat field (file format spec; not a runtime Vulkan call).
 # This is a file-format read of a Vulkan-defined enum, not a backend dependency.
