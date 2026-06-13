@@ -5,7 +5,7 @@ milestone_name: milestone
 status: executing
 stopped_at: Phase 9 Plan 01 pending
 last_updated: "2026-06-07T15:25:45.000Z"
-last_activity: 2026-06-13 - Completed quick task 260613-pg1: Add DDGI UI parameter and load mesh SDF from glTF-derived path
+last_activity: 2026-06-13 - Completed quick task 260613-q70: Add DDGI debug tuning UI and reset history after mesh SDF load
 progress:
   total_phases: 9
   completed_phases: 8
@@ -28,7 +28,7 @@ See: .planning/PROJECT.md (updated 2026-06-07)
 Phase: 09 (native-leak-closure-and-validation) - PENDING EXECUTION
 Plan: 0 of 4
 Status: Phase 5 is complete and verified; Phase 9 native-leak closure and final validation remain.
-Last activity: 2026-06-13 - Completed quick task 260613-pg1: Add DDGI UI parameter and load mesh SDF from glTF-derived path
+Last activity: 2026-06-13 - Completed quick task 260613-q70: Add DDGI debug tuning UI and reset history after mesh SDF load
 
 Progress: [#########-] 89%
 
@@ -95,6 +95,7 @@ Recent decisions affecting current work:
 | 260613-p01 | tools/sdf_baker 扩展 SDK baker 支持 gltf | 2026-06-13 | a7875bf | [260613-p01-tools-sdf-baker-sdk-baker-gltf](./quick/260613-p01-tools-sdf-baker-sdk-baker-gltf/) |
 | 260613-p7e | Fix sdf_baker glTF geometry loading to skip images | 2026-06-13 | c78ab63 | [260613-p7e-fix-sdf-baker-gltf-geometry-loading-to-s](./quick/260613-p7e-fix-sdf-baker-gltf-geometry-loading-to-s/) |
 | 260613-pg1 | Add DDGI UI parameter and load mesh SDF from glTF-derived path | 2026-06-13 | 0cb6fc5 | [260613-pg1-add-ddgi-ui-parameter-and-load-mesh-sdf-](./quick/260613-pg1-add-ddgi-ui-parameter-and-load-mesh-sdf-/) |
+| 260613-q70 | Add DDGI debug tuning UI and reset history after mesh SDF load | 2026-06-13 | c532ba7 | [260613-q70-add-ddgi-debug-tuning-ui-and-reset-histo](./quick/260613-q70-add-ddgi-debug-tuning-ui-and-reset-histo/) |
 
 ## Deferred Items
 
