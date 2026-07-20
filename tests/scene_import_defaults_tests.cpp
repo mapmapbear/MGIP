@@ -109,23 +109,21 @@ void verifyImportedScene(const demo::GltfModel& model)
   shaderio::CameraUniforms uniforms{};
   const demo::clipspace::ProjectionConvention convention =
       demo::clipspace::getProjectionConvention(demo::clipspace::BackendConvention::vulkan);
+  const glm::mat4 originalProjection = demo::clipspace::makePerspectiveProjection(
+      glm::radians(55.0f), 16.0f / 9.0f, 0.35f, 250.0f, convention);
   expect(demo::populatePrimarySceneCameraUniforms(
              model.cameras,
              std::span<const demo::SceneNode>{},
              model.nodes,
-             demo::rhi::Extent2D{1920, 1080},
-             convention,
+             originalProjection,
              uniforms),
          "failed to resolve imported camera");
   expect(nearlyEqual(uniforms.cameraPosition.x, 1.0f)
       && nearlyEqual(uniforms.cameraPosition.y, 2.0f)
       && nearlyEqual(uniforms.cameraPosition.z, 3.0f),
       "camera node transform was not applied");
-  expect(nearlyEqual(demo::clipspace::extractNearPlane(uniforms.projection, convention), 0.2f),
-         "resolved perspective near plane mismatch");
-  const float resolvedFarPlane = demo::clipspace::extractFarPlane(uniforms.projection, convention);
-  expect(nearlyEqual(resolvedFarPlane, 500.0f, 0.05f),
-         "resolved perspective far plane mismatch");
+  expect(matricesNearlyEqual(uniforms.projection, originalProjection),
+         "glTF camera projection parameters replaced the flight camera projection");
 
   demo::DirectionalLightSettings lightSettings{};
   expect(demo::applyPrimarySceneDirectionalLight(
@@ -161,20 +159,17 @@ void testOrthographicCamera()
   shaderio::CameraUniforms uniforms{};
   const demo::clipspace::ProjectionConvention convention =
       demo::clipspace::getProjectionConvention(demo::clipspace::BackendConvention::vulkan);
+  const glm::mat4 originalProjection = demo::clipspace::makePerspectiveProjection(
+      glm::radians(45.0f), 4.0f / 3.0f, 0.1f, 100.0f, convention);
   expect(demo::populatePrimarySceneCameraUniforms(
              std::span<const demo::SceneCamera>(&camera, 1),
              std::span<const demo::SceneNode>(&node, 1),
              std::span<const demo::GltfNodeData>{},
-             demo::rhi::Extent2D{800, 600},
-             convention,
+             originalProjection,
              uniforms),
          "failed to resolve orthographic camera");
-  expect(demo::clipspace::isOrthographicProjection(uniforms.projection),
-         "orthographic projection was not preserved");
-  expect(nearlyEqual(demo::clipspace::extractNearPlane(uniforms.projection, convention), 0.5f),
-         "orthographic near plane mismatch");
-  expect(nearlyEqual(demo::clipspace::extractFarPlane(uniforms.projection, convention), 50.0f),
-         "orthographic far plane mismatch");
+  expect(matricesNearlyEqual(uniforms.projection, originalProjection),
+         "orthographic glTF camera replaced the perspective flight camera projection");
 }
 
 void testSceneCameraNavigation()
@@ -188,20 +183,26 @@ void testSceneCameraNavigation()
   camera.farPlane = 50.0f;
 
   demo::SceneNode node{};
-  node.worldTransform = glm::translate(glm::mat4(1.0f), glm::vec3(7.0f, 8.0f, 9.0f))
-                      * glm::rotate(glm::mat4(1.0f), 0.35f, glm::vec3(0.0f, 0.0f, 1.0f));
+  const glm::mat4 sceneCameraPose =
+      glm::translate(glm::mat4(1.0f), glm::vec3(7.0f, 8.0f, 9.0f))
+      * glm::rotate(glm::mat4(1.0f), 0.35f, glm::vec3(0.0f, 0.0f, 1.0f));
+  node.worldTransform = sceneCameraPose
+                      * glm::scale(glm::mat4(1.0f), glm::vec3(2.0f, 3.0f, 4.0f));
 
   shaderio::CameraUniforms baseUniforms{};
   const demo::clipspace::ProjectionConvention convention =
       demo::clipspace::getProjectionConvention(demo::clipspace::BackendConvention::vulkan);
+  const glm::mat4 originalProjection = demo::clipspace::makePerspectiveProjection(
+      glm::radians(50.0f), 4.0f / 3.0f, 0.2f, 300.0f, convention);
   expect(demo::populatePrimarySceneCameraUniforms(
              std::span<const demo::SceneCamera>(&camera, 1),
              std::span<const demo::SceneNode>(&node, 1),
              std::span<const demo::GltfNodeData>{},
-             demo::rhi::Extent2D{800, 600},
-             convention,
+             originalProjection,
              baseUniforms),
          "failed to resolve scene camera for navigation");
+  expect(matricesNearlyEqual(baseUniforms.view, glm::inverse(sceneCameraPose)),
+         "scene camera node scale leaked into the flight camera pose");
 
   const glm::mat4 localNavigationWorld =
       glm::translate(glm::mat4(1.0f), glm::vec3(1.0f, 2.0f, -3.0f))
@@ -210,11 +211,11 @@ void testSceneCameraNavigation()
   demo::populateNavigatedSceneCameraUniforms(
       baseUniforms, glm::inverse(localNavigationWorld), navigatedUniforms);
 
-  const glm::mat4 expectedWorld = node.worldTransform * localNavigationWorld;
+  const glm::mat4 expectedWorld = sceneCameraPose * localNavigationWorld;
   expect(matricesNearlyEqual(navigatedUniforms.view, glm::inverse(expectedWorld)),
          "scene camera navigation did not preserve the base transform");
   expect(matricesNearlyEqual(navigatedUniforms.projection, baseUniforms.projection),
-         "scene camera navigation changed the glTF projection");
+         "scene camera navigation changed the flight camera projection");
   expect(nearlyEqual(navigatedUniforms.cameraPosition.x, expectedWorld[3].x)
       && nearlyEqual(navigatedUniforms.cameraPosition.y, expectedWorld[3].y)
       && nearlyEqual(navigatedUniforms.cameraPosition.z, expectedWorld[3].z),
@@ -256,12 +257,13 @@ void testImportAndCacheRoundTrips()
   shaderio::CameraUniforms uniforms{};
   const demo::clipspace::ProjectionConvention convention =
       demo::clipspace::getProjectionConvention(demo::clipspace::BackendConvention::vulkan);
+  const glm::mat4 originalProjection = demo::clipspace::makePerspectiveProjection(
+      glm::radians(45.0f), 16.0f / 9.0f, 0.1f, 100.0f, convention);
   expect(demo::populatePrimarySceneCameraUniforms(
              cachedAsset.cameras,
              cachedAsset.nodes,
              std::span<const demo::GltfNodeData>{},
-             demo::rhi::Extent2D{1920, 1080},
-             convention,
+             originalProjection,
              uniforms),
          "scene asset cache camera could not be resolved");
   expect(nearlyEqual(uniforms.cameraPosition.x, 1.0f), "scene asset cache camera transform mismatch");

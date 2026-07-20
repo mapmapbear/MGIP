@@ -1,6 +1,7 @@
 #include "common/FrameDeferredValue.h"
 #include "render/FlaxGIDebugModel.h"
 
+#include <cmath>
 #include <cstdlib>
 #include <iostream>
 
@@ -51,6 +52,28 @@ int main()
 	passed &= expect(demo::isNewFlaxGIDebugRequest(4u, 3u), "new request is detected");
 	passed &= expect(!demo::isNewFlaxGIDebugRequest(4u, 4u), "consumed request is ignored");
 	passed &= expect(!demo::isNewFlaxGIDebugRequest(0u, 9u), "zero request is never armed");
+
+	const float distanceLimit = demo::computeFlaxGIDistanceLimit(1.5f, 96.0f);
+	passed &= expect(std::abs(distanceLimit - 3.8971143f) < 1.0e-5f,
+	                 "distance horizon is 1.5 probe-cell diagonals");
+	passed &= expect(distanceLimit > std::sqrt(3.0f) * 1.5f,
+	                 "all-miss horizon covers the complete interpolation cell");
+	passed &= expect(std::abs(demo::computeFlaxGIDistanceLimit(1.5f, 2.0f) - 2.0f) < 1.0e-6f,
+	                 "configured ray maximum caps the distance horizon");
+	passed &= expect(std::abs(demo::computeFlaxGIRayStartOffset(1.5f, 0.25f) - 0.0625f)
+	                   < 1.0e-6f,
+	                 "ray start offset scales with SDF voxel size");
+
+	const demo::FlaxGIDistanceMoments blendedMoments =
+		demo::blendFlaxGIDistanceMoments({1.0f, 1.0f}, {3.0f, 9.0f}, 0.5f);
+	passed &= expect(std::abs(blendedMoments.first - 2.0f) < 1.0e-6f
+	                   && std::abs(blendedMoments.second - 5.0f) < 1.0e-6f,
+	                 "temporal history blends first and second raw moments");
+	passed &= expect(std::abs(demo::computeFlaxGIDistanceVariance(blendedMoments) - 1.0f)
+	                   < 1.0e-6f,
+	                 "variance retains the between-mean temporal term");
+	passed &= expect(demo::computeFlaxGIDistanceVariance({1.0f, 1.0f}) == 0.0f,
+	                 "all-miss normalized moments remain fully visible");
 
 	passed &= expect(demo::flaxGIDebugStageName(demo::FlaxGIDebugStage::traceRays) == "Trace Rays",
 	                 "stage names remain stable for UI and captures");
