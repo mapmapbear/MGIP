@@ -21,19 +21,33 @@ int main()
 {
 	bool passed = true;
 
-	const demo::FlaxGIIndirectDispatch unlimited = demo::computeFlaxGIIndirectDispatch(513u, 1024u, 0u);
-	passed &= expect(unlimited.activeProbeCount == 513u, "unlimited active probe count");
-	passed &= expect(unlimited.trace == demo::FlaxGIDispatchDimensions{3u, 1u, 1u}, "trace rounds up by 256");
-	passed &= expect(unlimited.distance == demo::FlaxGIDispatchDimensions{2052u, 1u, 1u}, "distance uses four groups per probe");
-	passed &= expect(unlimited.irradiance == demo::FlaxGIDispatchDimensions{513u, 1u, 1u}, "irradiance uses one group per probe");
+	const demo::FlaxGIIndirectDispatch unlimited = demo::computeFlaxGIIndirectDispatch(513u, 1024u, 1024u);
+	passed &= expect(unlimited.activeProbeCount == 513u, "classified active probe count is preserved");
+	passed &= expect(unlimited.trace == demo::FlaxGIDispatchDimensions{3u, 1u, 1u}, "trace covers every classified active probe");
+	passed &= expect(unlimited.distance == demo::FlaxGIDispatchDimensions{2052u, 1u, 1u}, "distance covers every classified active probe");
+	passed &= expect(unlimited.irradiance == demo::FlaxGIDispatchDimensions{513u, 1u, 1u}, "irradiance covers every classified active probe");
 
 	const demo::FlaxGIIndirectDispatch budgeted = demo::computeFlaxGIIndirectDispatch(900u, 800u, 64u);
-	passed &= expect(budgeted.activeProbeCount == 64u, "per-frame update budget clamps active probes");
+	passed &= expect(budgeted.activeProbeCount == 800u, "allocation clamps the classified active count");
 	passed &= expect(budgeted.trace.x == 1u, "budgeted trace group count");
 	passed &= expect(budgeted.distance.x == 256u, "budgeted distance group count");
 	passed &= expect(budgeted.irradiance.x == 64u, "budgeted irradiance group count");
 
 	const demo::FlaxGIIndirectDispatch empty = demo::computeFlaxGIIndirectDispatch(0u, 32768u, 64u);
+	passed &= expect(demo::computeFlaxGICascadeUpdateBudget(0u, 1024u, 0u, 4u) == 1024u,
+	                 "zero global budget means a full logical-grid update");
+	passed &= expect(demo::computeFlaxGICascadeUpdateBudget(65u, 1024u, 0u, 4u) == 17u,
+	                 "budget remainder is assigned to the first cascade");
+	passed &= expect(demo::computeFlaxGICascadeUpdateBudget(65u, 1024u, 1u, 4u) == 16u
+	               && demo::computeFlaxGICascadeUpdateBudget(65u, 1024u, 2u, 4u) == 16u
+	               && demo::computeFlaxGICascadeUpdateBudget(65u, 1024u, 3u, 4u) == 16u,
+	                 "remaining cascades receive an even budget");
+	passed &= expect(demo::computeFlaxGICascadeUpdateBudget(2u, 1024u, 0u, 4u) == 1u
+	               && demo::computeFlaxGICascadeUpdateBudget(2u, 1024u, 1u, 4u) == 1u
+	               && demo::computeFlaxGICascadeUpdateBudget(2u, 1024u, 2u, 4u) == 0u,
+	                 "a small global budget does not become an unlimited cascade update");
+	passed &= expect(demo::computeFlaxGICascadeUpdateBudget(64u, 1024u, 0u, 0u) == 0u,
+	                 "zero cascades produce zero work");
 	passed &= expect(empty.trace.x == 0u && empty.distance.x == 0u && empty.irradiance.x == 0u,
 	                 "zero active probes produce zero indirect work");
 
@@ -63,6 +77,36 @@ int main()
 	passed &= expect(std::abs(demo::computeFlaxGIRayStartOffset(1.5f, 0.25f) - 0.0625f)
 	                   < 1.0e-6f,
 	                 "ray start offset scales with SDF voxel size");
+
+	demo::FlaxGIOutputState outputState{};
+	passed &= expect(outputState.published() == demo::FlaxGIOutputSelection{0u, false},
+	                 "FlaxGI output starts unpublished");
+	passed &= expect(outputState.selectForFrame(true, false)
+	                   == demo::FlaxGIOutputSelection{0u, true},
+	                 "first full update publishes parity zero");
+	outputState.publishPending();
+	passed &= expect(outputState.published() == demo::FlaxGIOutputSelection{0u, true},
+	                 "completed update publishes its write parity");
+	passed &= expect(outputState.selectForFrame(false, false)
+	                   == demo::FlaxGIOutputSelection{0u, true},
+	                 "frozen frames remain pinned to the published parity");
+	passed &= expect(outputState.selectForFrame(true, false)
+	                   == demo::FlaxGIOutputSelection{1u, true},
+	                 "resumed updates write the opposite history parity");
+	outputState.publishPending();
+	passed &= expect(outputState.published() == demo::FlaxGIOutputSelection{1u, true},
+	                 "second completed update publishes parity one");
+	outputState.invalidate();
+	passed &= expect(outputState.selectForFrame(false, true)
+	                   == demo::FlaxGIOutputSelection{1u, false},
+	                 "reset disables sampling of cleared atlases");
+	passed &= expect(outputState.selectForFrame(true, true)
+	                   == demo::FlaxGIOutputSelection{0u, true},
+	                 "a full update in the reset frame publishes the pending parity");
+	outputState.publishPending();
+	outputState.reset();
+	passed &= expect(outputState.nextWriteParity == 0u && !outputState.published().valid,
+	                 "resource rebuild resets output publication state");
 
 	const demo::FlaxGIDistanceMoments blendedMoments =
 		demo::blendFlaxGIDistanceMoments({1.0f, 1.0f}, {3.0f, 9.0f}, 0.5f);

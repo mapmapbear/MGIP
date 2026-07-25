@@ -76,7 +76,14 @@ void writeTestScene(const std::filesystem::path& path)
     "type": "perspective",
     "perspective": {"aspectRatio": 1.5, "yfov": 0.7, "znear": 0.2, "zfar": 500.0}
   }],
-  "extensionsUsed": ["KHR_lights_punctual"],
+  "materials": [{
+    "name": "StrongEmitter",
+    "emissiveFactor": [0.25, 0.5, 1.0],
+    "extensions": {
+      "KHR_materials_emissive_strength": {"emissiveStrength": 4.0}
+    }
+  }],
+  "extensionsUsed": ["KHR_lights_punctual", "KHR_materials_emissive_strength"],
   "extensions": {
     "KHR_lights_punctual": {
       "lights": [
@@ -96,6 +103,13 @@ void verifyImportedScene(const demo::GltfModel& model)
 {
   expect(model.cameras.size() == 1, "expected one imported camera");
   expect(model.lights.size() == 2, "expected two imported lights");
+  expect(model.materials.size() == 1, "expected one imported material");
+
+  const glm::vec3 emissiveFactor = model.materials.front().emissiveFactor;
+  expect(nearlyEqual(emissiveFactor.x, 1.0f)
+      && nearlyEqual(emissiveFactor.y, 2.0f)
+      && nearlyEqual(emissiveFactor.z, 4.0f),
+      "KHR_materials_emissive_strength was not applied to the emissive factor");
 
   const demo::SceneCamera& camera = model.cameras.front();
   expect(camera.name == "MainCamera", "camera name was not preserved");
@@ -253,6 +267,11 @@ void testImportAndCacheRoundTrips()
   expect(assetSerializer.load(assetPath, cachedAsset), assetSerializer.getLastError().c_str());
   expect(cachedAsset.cameras.size() == 1, "scene asset cache lost the camera");
   expect(cachedAsset.lights.size() == 2, "scene asset cache lost the lights");
+  expect(cachedAsset.materials.size() == 1, "scene asset cache lost the material");
+  expect(nearlyEqual(cachedAsset.materials.front().emissiveFactor.x, 1.0f)
+      && nearlyEqual(cachedAsset.materials.front().emissiveFactor.y, 2.0f)
+      && nearlyEqual(cachedAsset.materials.front().emissiveFactor.z, 4.0f),
+      "scene asset cache lost the emissive strength");
 
   shaderio::CameraUniforms uniforms{};
   const demo::clipspace::ProjectionConvention convention =
