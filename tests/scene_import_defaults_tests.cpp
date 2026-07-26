@@ -87,7 +87,7 @@ void writeTestScene(const std::filesystem::path& path)
   "extensions": {
     "KHR_lights_punctual": {
       "lights": [
-        {"name": "Sun", "type": "directional", "color": [0.5, 0.75, 1.0], "intensity": 2.0},
+        {"name": "Sun", "type": "directional", "color": [0.5, 0.75, 1.0], "intensity": 34150.0},
         {"name": "Fill", "type": "point", "color": [1.0, 0.25, 0.1], "intensity": 4.0, "range": 12.0}
       ]
     }
@@ -120,6 +120,17 @@ void verifyImportedScene(const demo::GltfModel& model)
   expect(nearlyEqual(camera.nearPlane, 0.2f), "camera near plane mismatch");
   expect(nearlyEqual(camera.farPlane, 500.0f), "camera far plane mismatch");
 
+  const demo::SceneLight& directionalLight = model.lights[0];
+  expect(directionalLight.type == demo::SceneLightType::directional,
+         "expected the first light to be directional");
+  expect(nearlyEqual(directionalLight.intensity, 50.0f),
+         "directional light lux was not converted to Blender-compatible intensity");
+  const demo::SceneLight& pointLight = model.lights[1];
+  expect(pointLight.type == demo::SceneLightType::point,
+         "expected the second light to be a point light");
+  expect(nearlyEqual(pointLight.intensity, 4.0f),
+         "point light intensity must not use the directional-light conversion");
+
   shaderio::CameraUniforms uniforms{};
   const demo::clipspace::ProjectionConvention convention =
       demo::clipspace::getProjectionConvention(demo::clipspace::BackendConvention::vulkan);
@@ -150,9 +161,9 @@ void verifyImportedScene(const demo::GltfModel& model)
       && nearlyEqual(lightSettings.direction.y, 0.0f)
       && nearlyEqual(lightSettings.direction.z, -1.0f),
       "directional light node transform mismatch");
-  expect(nearlyEqual(lightSettings.color.x, 1.0f)
-      && nearlyEqual(lightSettings.color.y, 1.5f)
-      && nearlyEqual(lightSettings.color.z, 2.0f),
+  expect(nearlyEqual(lightSettings.color.x, 25.0f)
+      && nearlyEqual(lightSettings.color.y, 37.5f)
+      && nearlyEqual(lightSettings.color.z, 50.0f),
       "directional light color/intensity mismatch");
   expect(glm::length(lightSettings.ambient) == 0.0f, "glTF lights must suppress fallback ambient light");
 }
