@@ -147,8 +147,14 @@ void verifyImportedScene(const demo::GltfModel& model)
       && nearlyEqual(uniforms.cameraPosition.y, 2.0f)
       && nearlyEqual(uniforms.cameraPosition.z, 3.0f),
       "camera node transform was not applied");
-  expect(matricesNearlyEqual(uniforms.projection, originalProjection),
-         "glTF camera projection parameters replaced the flight camera projection");
+  const glm::mat4 expectedProjection = demo::clipspace::makePerspectiveProjection(
+      camera.verticalFieldOfViewRadians,
+      camera.aspectRatio,
+      camera.nearPlane,
+      camera.farPlane,
+      convention);
+  expect(matricesNearlyEqual(uniforms.projection, expectedProjection),
+         "glTF camera projection parameters were not applied");
 
   demo::DirectionalLightSettings lightSettings{};
   expect(demo::applyPrimarySceneDirectionalLight(
@@ -193,8 +199,16 @@ void testOrthographicCamera()
              originalProjection,
              uniforms),
          "failed to resolve orthographic camera");
-  expect(matricesNearlyEqual(uniforms.projection, originalProjection),
-         "orthographic glTF camera replaced the perspective flight camera projection");
+  const glm::mat4 expectedProjection = demo::clipspace::makeOrthographicProjection(
+      -camera.horizontalMagnification,
+      camera.horizontalMagnification,
+      -camera.verticalMagnification,
+      camera.verticalMagnification,
+      camera.nearPlane,
+      camera.farPlane,
+      convention);
+  expect(matricesNearlyEqual(uniforms.projection, expectedProjection),
+         "orthographic glTF camera projection parameters were not applied");
 }
 
 void testSceneCameraNavigation()
