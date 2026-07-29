@@ -1,12 +1,13 @@
 # Vulkan Minimal Latest - Architecture Baseline
 
-> **Document Purpose**: Capture the current architecture of `src/minimal_latest.cpp` as a baseline for refactoring.
+> **Historical Snapshot**: Captures the architecture of `src/minimal_latest.cpp` as it existed before the renderer/RHI split.
 > **Generated From**: `src/minimal_latest.cpp` (3669 lines), `README.md`
 > **Date**: 2026-03-31
+> **Current Renderer Delta**: The current renderer creates renderer-owned 1x1 white/normal RGBA fallback textures. It does not load `image1.jpg`/`image2.jpg` from the process working directory and has no fixed two-image member array.
 
 ## 1. Overview
 
-The current implementation is a single-file Vulkan sample demonstrating modern Vulkan 1.4 patterns. The entire application is contained within the `MinimalLatest` class (~2185-3669 lines), which owns all Vulkan resources, window management, and rendering logic.
+The historical baseline implementation was a single-file Vulkan sample demonstrating modern Vulkan 1.4 patterns. The entire application was contained within the `MinimalLatest` class (~2185-3669 lines), which owned all Vulkan resources, window management, and rendering logic.
 
 ## 2. Main Classes
 
@@ -116,7 +117,7 @@ Limits frame rate to monitor refresh rate when vSync is enabled.
 16. GPU Buffers Upload (~2410-2432):
     - Vertex buffer (SSBO)
     - Points buffer
-    - Load image1.jpg, image2.jpg
+    - Historical baseline: load image1.jpg and image2.jpg
 
 17. Scene Info Buffer (~2436)
 
@@ -252,9 +253,11 @@ while(!glfwWindowShouldClose(m_window))
 
 ## 5. Resource Ownership
 
-### 5.1 Current Resource Members (MinimalLatest)
+### 5.1 Historical Resource Members (MinimalLatest Snapshot)
 
 **Location**: `src/minimal_latest.cpp:3534-3579`
+
+The historical snapshot kept `image1.jpg` and `image2.jpg` in a fixed two-element `utils::ImageResource` array. The current renderer has no equivalent fixed member; current fallback ownership is described in the header note above.
 
 ```cpp
 // Window & Surface
@@ -274,9 +277,6 @@ utils::Gbuffer m_gBuffer;                      // Render target
 utils::Buffer m_vertexBuffer;                  // SSBO - animated vertices
 utils::Buffer m_pointsBuffer;                  // SSBO - points data
 utils::Buffer m_sceneInfoBuffer;               // UBO - scene uniforms
-
-// Images
-utils::ImageResource m_image[2];               // Textures (image1, image2)
 
 // Pipelines
 VkPipelineLayout m_graphicPipelineLayout;      // Graphics layout
