@@ -3154,6 +3154,22 @@ namespace
 		       "large finite light direction changed the scale-invariant light basis");
 	}
 
+	void testShadowTextureTransformIsBackendIndependent()
+	{
+		const glm::mat4 vulkanTransform = demo::clipspace::makeNdcToShadowTextureMatrix(
+			demo::clipspace::getProjectionConvention(demo::clipspace::BackendConvention::vulkan));
+		const glm::mat4 d3d12Transform = demo::clipspace::makeNdcToShadowTextureMatrix(
+			demo::clipspace::getProjectionConvention(demo::clipspace::BackendConvention::d3d12));
+		const glm::mat4 metalTransform = demo::clipspace::makeNdcToShadowTextureMatrix(
+			demo::clipspace::getProjectionConvention(demo::clipspace::BackendConvention::metal));
+
+		expect(matricesNearlyEqual(vulkanTransform, d3d12Transform, 0.0f),
+		       "D3D12 shadow texture transform changed backend-independent texture coordinates");
+		expect(matricesNearlyEqual(vulkanTransform, metalTransform, 0.0f),
+		       "Metal shadow texture transform changed backend-independent texture coordinates");
+		expect(nearlyEqual(vulkanTransform[1][1], 0.5f, 0.0f),
+		       "shadow texture transform must map NDC Y with a positive half scale");
+	}
 	void testTinyCascadeResolutionClamp()
 	{
 		constexpr uint32_t minimumResolution =
@@ -3205,6 +3221,7 @@ int main()
 		testLargeNormalBiasExpandsCascadeCullingGuard();
 		testNormalBiasSanitization();
 		testSafeLightDirectionSnapshot();
+		testShadowTextureTransformIsBackendIndependent();
 		testTinyCascadeResolutionClamp();
 		testStableCascadeProjection();
 		testOffCenterProjection();

@@ -50,23 +50,41 @@ namespace
 
 		void init(const rhi::DeviceCreateInfo&) override {}
 		void deinit() override {}
-		uint32_t getApiVersion() const override { return 0; }
+		rhi::BackendInfo getBackendInfo() const override { return {.type = rhi::BackendType::vulkan, .apiName = "fake"}; }
 		const char* getDeviceName() const override { return "GPUSceneRegistryFakeDevice"; }
 		const rhi::PhysicalDeviceInfo& getPhysicalDeviceInfo() const override { return m_physicalDeviceInfo; }
 		const rhi::DeviceFeatureInfo& getEnabledFeatureInfo() const override { return m_featureInfo; }
 		rhi::CapabilityReport queryCapabilities() const override { return {}; }
 		bool supports(rhi::CapabilityTier) const override { return false; }
 		const rhi::MemoryProperties& getPhysicalMemoryProperties() const override { return m_memoryProperties; }
-		rhi::QueueInfo getGraphicsQueue() const override { return {}; }
-		rhi::QueueInfo getComputeQueue() const override { return {}; }
-		rhi::QueueInfo getTransferQueue() const override { return {}; }
 		void waitIdle() override {}
+		rhi::Queue* getQueue(rhi::QueueClass) override { return nullptr; }
+		std::unique_ptr<rhi::CommandAllocator> createCommandAllocator(rhi::QueueClass) override { return nullptr; }
+		void initSurface(rhi::Surface&, const rhi::WindowHandle&) override {}
+		std::unique_ptr<rhi::Swapchain> createSwapchain(rhi::Surface&, bool) override { return nullptr; }
 
 		rhi::TextureViewHandle createTextureView(const rhi::TextureViewCreateDesc&) override { return {}; }
-		rhi::TextureViewHandle registerExternalTextureView(uint64_t) override { return {}; }
 		void destroyTextureView(rhi::TextureViewHandle) override {}
-		rhi::TextureHandle registerExternalTexture(uint64_t) override { return {}; }
-		void destroyImage(rhi::TextureHandle) override {}
+		rhi::TextureHandle createTexture(const rhi::TextureDesc&) override { return {}; }
+		void destroyTexture(rhi::TextureHandle) override {}
+
+		rhi::SamplerHandle createSampler(const rhi::SamplerDesc&) override { return {}; }
+		void destroySampler(rhi::SamplerHandle) override {}
+		rhi::ArgumentLayoutHandle createArgumentLayout(const rhi::ArgumentLayoutDesc&) override { return {}; }
+		void destroyArgumentLayout(rhi::ArgumentLayoutHandle) override {}
+		rhi::ArgumentTableHandle createArgumentTable(const rhi::ArgumentTableCreateDesc&) override { return {}; }
+		void destroyArgumentTable(rhi::ArgumentTableHandle) override {}
+		void updateArgumentTable(rhi::ArgumentTableHandle, rhi::ArgumentWriteBatch) override {}
+		rhi::ArgumentLayoutHandle getArgumentTableLayout(rhi::ArgumentTableHandle) const override { return {}; }
+		rhi::PipelineHandle createGraphicsPipeline(const rhi::GraphicsPipelineDesc&) override { return {}; }
+		rhi::PipelineHandle createComputePipeline(const rhi::ComputePipelineDesc&) override { return {}; }
+		void destroyPipeline(rhi::PipelineHandle) override {}
+		rhi::QueryPoolHandle createQueryPool(uint32_t) override { return {}; }
+		void destroyQueryPool(rhi::QueryPoolHandle) override {}
+		uint64_t getQueryPoolResult(rhi::QueryPoolHandle, uint32_t) override { return 0; }
+		bool getQueryPoolResultsWithAvailability(rhi::QueryPoolHandle, uint32_t, std::span<uint64_t>) override { return false; }
+		rhi::ShaderLibraryHandle createShaderLibrary(const rhi::ShaderLibraryDesc&) override { return {}; }
+		void destroyShaderLibrary(rhi::ShaderLibraryHandle) override {}
 
 		rhi::BufferHandle createBuffer(const rhi::BufferDesc& desc) override
 		{
@@ -175,7 +193,7 @@ namespace
 
 		void setPipeline(rhi::PipelineHandle) override {}
 		void setArgumentTable(uint32_t, rhi::ArgumentTableHandle) override {}
-		void setRootConstants(uint32_t, const void*, uint32_t) override {}
+		void setRootConstants(uint32_t, std::span<const std::byte>) override {}
 		void setRootPointer(uint32_t, rhi::GpuPtr) override {}
 		void dispatch(const rhi::DispatchDesc&) override {}
 		void dispatchIndirect(const rhi::DispatchIndirectDesc&) override {}
@@ -201,6 +219,10 @@ namespace
 		{
 		}
 
+		void begin(rhi::CommandAllocator&) override { m_state = rhi::CommandBufferState::recording; }
+		void end() override { m_state = rhi::CommandBufferState::executable; }
+		[[nodiscard]] rhi::CommandBufferState state() const noexcept override { return m_state; }
+
 		rhi::RenderEncoder* beginRenderPass(const rhi::RenderPassDesc&) override { return nullptr; }
 		rhi::ComputeEncoder* beginComputePass() override { return &m_compute; }
 		void endEncoding() override {}
@@ -210,8 +232,9 @@ namespace
 		{
 			barriers.push_back(BarrierRecord{producer, consumer, hazards});
 		}
-		void resourceBarrier(const rhi::TextureBarrier*, uint32_t,
-		                     const rhi::BufferBarrier*, uint32_t) override {}
+		void resourceBarrier(std::span<const rhi::TextureBarrier>,
+		                     std::span<const rhi::BufferBarrier>,
+		                     std::span<const rhi::AliasingBarrier>) override {}
 		void clearColorTexture(rhi::TextureHandle,
 		                       const rhi::TextureSubresourceRange&,
 		                       const rhi::ClearColorValue&) override {}
@@ -242,6 +265,7 @@ namespace
 	private:
 		FakeDevice* m_device{nullptr};
 		FakeComputeEncoder m_compute;
+		rhi::CommandBufferState m_state{rhi::CommandBufferState::idle};
 	};
 
 	void FakeComputeEncoder::copyBuffer(rhi::BufferHandle source,

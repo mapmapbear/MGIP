@@ -1,0 +1,41 @@
+name: RHI Contract
+
+on:
+  push:
+    paths:
+      - "rhi/**"
+      - "tests/rhi_public_contract_tests.cpp"
+      - "tests/metal4_contract_tests.mm"
+      - "CMakeLists.txt"
+      - ".github/workflows/rhi-contract.yml"
+  pull_request:
+    paths:
+      - "rhi/**"
+      - "tests/rhi_public_contract_tests.cpp"
+      - "tests/metal4_contract_tests.mm"
+      - "CMakeLists.txt"
+
+jobs:
+  windows-d3d12:
+    runs-on: windows-2022
+    steps:
+      - uses: actions/checkout@v4
+      - name: Configure contract targets
+        run: cmake -S . -B out/ci-rhi -DDEMO_RHI_CONTRACT_ONLY=ON
+      - name: Build D3D12 and public contracts
+        run: cmake --build out/ci-rhi --config Debug --parallel
+      - name: Test public contracts
+        run: ctest --test-dir out/ci-rhi -C Debug --output-on-failure
+
+  macos-metal4-contract:
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Select latest Xcode
+        run: sudo xcode-select --switch /Applications/Xcode.app
+      - name: Configure contract targets
+        run: cmake -S . -B out/ci-rhi -DDEMO_RHI_CONTRACT_ONLY=ON
+      - name: Build Objective-C++ Metal contract
+        run: cmake --build out/ci-rhi --config Debug --parallel
+      - name: Test contracts
+        run: ctest --test-dir out/ci-rhi -C Debug --output-on-failure
